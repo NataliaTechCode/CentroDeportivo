@@ -8,6 +8,7 @@ const sportRoutes = require('./routes/SportRoutes');
 const coachRoutes = require('./routes/CoachRoutes');
 const scheduleRoutes = require('./routes/ScheduleRoutes');
 const monthlyRoutes = require('./routes/MonthlyRoutes');
+const activityRoutes = require('./routes/ActivityRoutes');
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use('/api', sportRoutes);
 app.use('/api', coachRoutes);
 app.use('/api', scheduleRoutes);
 app.use('/api', monthlyRoutes);
+app.use('/api', activityRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
