@@ -4,18 +4,18 @@ const studentController = require("../controllers/StudentController");
 const router = express.Router();
 
 // Ruta para obtener todas los Estudiantes
-router.get("/estudiantes", studentController.getStudent);
+router.get("/estudiante", studentController.getStudent);
 
 //Ruta para buscar Estudiante
-router.get("/estudiantes/:id", studentController.searchStudent);
+router.get("/estudiante/:id", studentController.searchStudent);
 
 // Ruta para crear un Estudiante
-router.post("/estudiantes", studentController.addStudent);
+router.post("/estudiante", studentController.addStudent);
 
 //Ruta para editar Estudiante
-router.put("/estudiantes/:id", studentController.updateStudent);
+router.put("/estudiante/:id", studentController.updateStudent);
 
 // Ruta para eliminar un Estudiante
-router.delete("/estudiantes/:id", studentController.deleteStudent);
+router.delete("/estudiante/:id", studentController.deleteStudent);
 
 module.exports = router;

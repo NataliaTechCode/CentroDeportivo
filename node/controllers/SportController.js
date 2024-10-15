@@ -13,7 +13,7 @@ const searchSport = async (req, res) => {
   const id = req.params.id;
   try {
     const sport = await Sport.searchSport(id);
-    if (sport) {
+    if (sport.length > 0) {
       res.status(200).send(sport);
     } else {
       res.status(404).send({ message: "deporte no encontrado" });

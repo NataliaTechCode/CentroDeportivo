@@ -13,7 +13,7 @@ const searchStudent = async (req, res) => {
   const id = req.params.id;
   try {
     const student = await Student.searchStudent(id);
-    if (student) {
+    if (student.length > 0) {
       res.status(200).send(student);
     } else {
       res.status(404).send({ message: "Estudiante no encontrado" });
