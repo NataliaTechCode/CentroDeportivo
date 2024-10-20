@@ -13,10 +13,10 @@ const searchSchedule = async (req, res) => {
   const id = req.params.id;
   try {
     const schedule = await Schedule.searchSchedule(id);
-    if (schedule.length > 0) {
+    if (schedule) {
       res.status(200).send(schedule);
     } else {
-      res.status(200).send({ message: "horario no encontrado" });
+      res.status(404).send({ message: "Horario no encontrado" });
     }
   } catch (error) {
     res.status(500).send({ message: error.message });

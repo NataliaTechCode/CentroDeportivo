@@ -24,16 +24,17 @@ class Schedule {
 
   static async searchSchedule(id) {
     try {
-      const snapshot = await db
-        .collection("schedule")
-        .where("idschedule", "==", id)
-        .get();
-      if (snapshot.empty) {
-        return [];
+      const scheduleRef = db.collection("schedule").doc(id); // Obtiene la referencia al documento del estudiante
+      const scheduleDoc = await scheduleRef.get(); // Obtiene el documento
+      // console.log(Object.keys(schedule).length);
+
+      if (!scheduleDoc.exists) {
+        throw new Error("Estudiante no encontrado");
       }
-      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      return { id: scheduleDoc.id, ...scheduleDoc.data() }; // Retorna el ID y los datos del estudiante
     } catch (error) {
-      throw new Error("Error buscando horario: " + error.message);
+      throw new Error("Error obteniendo estudiante: " + error.message);
     }
   }
 

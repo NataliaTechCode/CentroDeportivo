@@ -18,16 +18,17 @@ class Sport {
 
   static async searchSport(id) {
     try {
-      const snapshot = await db
-        .collection("sport")
-        .where("idsport", "==", id)
-        .get();
-      if (snapshot.empty) {
-        return [];
+      const sportRef = db.collection("sport").doc(id); // Obtiene la referencia al documento del estudiante
+      const sportDoc = await sportRef.get(); // Obtiene el documento
+      // console.log(Object.keys(sport).length);
+
+      if (!sportDoc.exists) {
+        throw new Error("Estudiante no encontrado");
       }
-      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      return { id: sportDoc.id, ...sportDoc.data() }; // Retorna el ID y los datos del estudiante
     } catch (error) {
-      throw new Error("Error buscando deporte: " + error.message);
+      throw new Error("Error obteniendo estudiante: " + error.message);
     }
   }
 

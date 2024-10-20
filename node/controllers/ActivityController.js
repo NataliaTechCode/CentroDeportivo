@@ -13,10 +13,10 @@ const searchActivity = async (req, res) => {
   const id = req.params.id;
   try {
     const activity = await Activity.searchActivity(id);
-    if (activity.length > 0) {
+    if (activity) {
       res.status(200).send(activity);
     } else {
-      res.status(200).send({ message: "actividad no encontrada" });
+      res.status(404).send({ message: "Actividad no encontrada" });
     }
   } catch (error) {
     res.status(500).send({ message: error.message });

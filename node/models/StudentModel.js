@@ -22,16 +22,17 @@ class Student {
 
   static async searchStudent(id) {
     try {
-      const snapshot = await db
-        .collection("student")
-        .where("idstudent", "==", id)
-        .get();
-      if (snapshot.empty) {
-        return []; // Retorna un arreglo vacío si no hay coincidencias
+      const studentRef = db.collection("student").doc(id); // Obtiene la referencia al documento del estudiante
+      const studentDoc = await studentRef.get(); // Obtiene el documento
+      // console.log(Object.keys(student).length);
+
+      if (!studentDoc.exists) {
+        throw new Error("Estudiante no encontrado");
       }
-      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      return { id: studentDoc.id, ...studentDoc.data() }; // Retorna el ID y los datos del estudiante
     } catch (error) {
-      throw new Error("Error buscando estudiante: " + error.message);
+      throw new Error("Error obteniendo estudiante: " + error.message);
     }
   }
 
@@ -86,7 +87,6 @@ class Student {
 
       await studentref.delete(); // Elimina el documento del estudiante
       return { message: "Estudiante eliminado con éxito" };
-
     } catch (error) {
       throw new Error("Error eliminando estudiante: " + error.message);
     }

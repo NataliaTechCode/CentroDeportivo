@@ -13,10 +13,10 @@ const searchMonthly = async (req, res) => {
   const id = req.params.id;
   try {
     const monthly = await Monthly.searchMonthly(id);
-    if (monthly.length > 0) {
+    if (monthly) {
       res.status(200).send(monthly);
     } else {
-      res.status(200).send({ message: "mensualidad no encontrada" });
+      res.status(404).send({ message: "Mensualidad no encontrada" });
     }
   } catch (error) {
     res.status(500).send({ message: error.message });

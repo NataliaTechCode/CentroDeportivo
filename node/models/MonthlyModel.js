@@ -22,16 +22,17 @@ class Monthly {
 
   static async searchMonthly(id) {
     try {
-      const snapshot = await db
-        .collection("monthly")
-        .where("idmonthly", "==", id)
-        .get();
-      if (snapshot.empty) {
-        return [];
+      const monthlyRef = db.collection("monthly").doc(id); // Obtiene la referencia al documento de la Mensualidad
+      const monthlyDoc = await monthlyRef.get(); // Obtiene el documento
+      // console.log(Object.keys(monthly).length);
+
+      if (!monthlyDoc.exists) {
+        throw new Error("Mensualidad no encontrada");
       }
-      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      return { id: monthlyDoc.id, ...monthlyDoc.data() }; // Retorna el ID y los datos del Mensualidad
     } catch (error) {
-      throw new Error("Error buscando mensualidad: " + error.message);
+      throw new Error("Error obteniendo Mensualidad: " + error.message);
     }
   }
 

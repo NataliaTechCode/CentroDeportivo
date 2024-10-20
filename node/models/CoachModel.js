@@ -12,23 +12,24 @@ class Coach {
       const snapshot = await db.collection("coach").get();
       return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     } catch (error) {
-        console.log(error.message)
+      console.log(error.message);
       throw new Error("Error obteniendo entrenadoress: " + error.message);
     }
   }
 
   static async searchCoach(id) {
     try {
-      const snapshot = await db
-        .collection("coach")
-        .where("idcoach", "==", id)
-        .get();
-      if (snapshot.empty) {
-        return [];
+      const coachRef = db.collection("coach").doc(id); // Obtiene la referencia al documento del Entrenador
+      const coachDoc = await coachRef.get(); // Obtiene el documento
+      // console.log(Object.keys(coach).length);
+
+      if (!coachDoc.exists) {
+        throw new Error("Entrenador no encontrado");
       }
-      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      return { id: coachDoc.id, ...coachDoc.data() }; // Retorna el ID y los datos del Entrenador
     } catch (error) {
-      throw new Error("Error buscando entrenador: " + error.message);
+      throw new Error("Error obteniendo Entrenador: " + error.message);
     }
   }
 

@@ -23,19 +23,19 @@ class User {
 
   static async searchUser(id) {
     try {
-      const snapshot = await db
-        .collection("user")
-        .where("iduser", "==", id)
-        .get();
-      if (snapshot.empty) {
-        return []; 
+      const userRef = db.collection("user").doc(id); // Obtiene la referencia al documento del estudiante
+      const userDoc = await userRef.get(); // Obtiene el documento
+      // console.log(Object.keys(user).length);
+
+      if (!userDoc.exists) {
+        throw new Error("Estudiante no encontrado");
       }
-      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      return { id: userDoc.id, ...userDoc.data() }; // Retorna el ID y los datos del estudiante
     } catch (error) {
-      throw new Error("Error buscando Usuario: " + error.message);
+      throw new Error("Error obteniendo estudiante: " + error.message);
     }
   }
-
   static async addUser(data) {
     try {
       const snapshot = await db.collection("user").get();

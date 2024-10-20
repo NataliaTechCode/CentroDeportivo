@@ -21,19 +21,19 @@ class Activity {
 
   static async searchActivity(id) {
     try {
-      const snapshot = await db
-        .collection("activity")
-        .where("idactivity", "==", id)
-        .get();
-      if (snapshot.empty) {
-        return [];
+      const activityRef = db.collection("activity").doc(id); // Obtiene la referencia al documento del Actividad
+      const activityDoc = await activityRef.get(); // Obtiene el documento
+      // console.log(Object.keys(activity).length);
+
+      if (!activityDoc.exists) {
+        throw new Error("Actividad no encontrado");
       }
-      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      return { id: activityDoc.id, ...activityDoc.data() }; // Retorna el ID y los datos del Actividad
     } catch (error) {
-      throw new Error("Error buscando actividad: " + error.message);
+      throw new Error("Error obteniendo Actividad: " + error.message);
     }
   }
-
   static async addActivity(data) {
     try {
       const snapshot = await db.collection("activity").get();

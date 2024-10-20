@@ -13,15 +13,16 @@ const searchUser = async (req, res) => {
   const id = req.params.id;
   try {
     const user = await User.searchUser(id);
-    if (user.length > 0) {
+    if (user) {
       res.status(200).send(user);
     } else {
-      res.status(404).send({ message: "usuario no encontrado" });
+      res.status(404).send({ message: "Estudiante no encontrado" });
     }
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
 };
+
 
 const addUser = async (req, res) => {
   try {

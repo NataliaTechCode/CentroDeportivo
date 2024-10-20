@@ -13,10 +13,10 @@ const searchCoach = async (req, res) => {
   const id = req.params.id;
   try {
     const coach = await Coach.searchCoach(id);
-    if (coach.length > 0) {
+    if (coach) {
       res.status(200).send(coach);
     } else {
-      res.status(404).send({ message: "entrenador no encontrado" });
+      res.status(404).send({ message: "Entrenador no encontrado" });
     }
   } catch (error) {
     res.status(500).send({ message: error.message });
