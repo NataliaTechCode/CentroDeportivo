@@ -24,8 +24,8 @@ const CompEditCoach = () => {
 
   const getCoachByid = useCallback(async () => {
     const res = await axios.get(URI + id);
-    setNamecoach(res.data.name);
-    setPhone(res.data.coachname);
+    setNamecoach(res.data.namecoach);
+    setPhone(res.data.phone);
   }, [id]);
 
   useEffect(() => {

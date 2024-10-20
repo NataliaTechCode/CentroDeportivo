@@ -31,6 +31,10 @@ import CompShowActivity from "./components/activity/ShowActivity"
 import CompCreateActivity from "./components/activity/CreateActivity";
 import CompEditActivity from "./components/activity/EditActivity";
 
+import CompShowSport from "./components/sport/ShowSport";
+import CompCreateSport from "./components/sport/CreateSport";
+import CompEditSport from "./components/sport/EditSport";
+
 export const ThemeContext = React.createContext(null);
 
 function App() {
@@ -85,6 +89,10 @@ function App() {
                 <Route path="/activity" element={<CompShowActivity/>} />
                 <Route path="/activity/create" element={<CompCreateActivity/>} />
                 <Route path="/activity/edit/:id" element={<CompEditActivity/>} />
+
+                <Route path="/sport" element={<CompShowSport/>} />
+                <Route path="/sport/create" element={<CompCreateSport/>} />
+                <Route path="/sport/edit/:id" element={<CompEditSport/>} />
 
               </Routes>
             </Container>

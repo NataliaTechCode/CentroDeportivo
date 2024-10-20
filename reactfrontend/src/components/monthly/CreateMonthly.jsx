@@ -7,8 +7,8 @@ import { DatePicker, TimePicker } from "@material-ui/pickers";
 const URI = "http://localhost:4000/api/mensualidad";
 
 const CompCreateMonthly = () => {
-  const [startdate, setStartdate] = useState(new Date());;
-  const [enddate, setEnddate] = useState(new Date());;
+  const [startdate, setStartdate] = useState(new Date());
+  const [enddate, setEnddate] = useState(new Date());
   const [student, setStudent] = useState("");
   const [schedule, setSchedule] = useState("10:00");
   const [state, setState] = useState("");
@@ -32,44 +32,47 @@ const CompCreateMonthly = () => {
       <div>
         <h1>Añadir Mensualidad</h1>
         <form onSubmit={Store}>
-          <div className="mb-3">
-            <label className="form-label">Fecha de inicio: </label>
-            <DatePicker
-              value={startdate}
-              onChange={(date) => setStartdate(date)}
-              dateFormat="dd/MM/yyyy"
-              className="form-control"
-            />
-          </div>
+          <div className="input-container">
+            <div className="mb-3">
+              <label className="form-label">Fecha de inicio: </label>
+              <DatePicker
+                value={startdate}
+                onChange={(date) => setStartdate(date)}
+                dateFormat="dd/MM/yyyy"
+                className="form-control"
+              />
+            </div>
 
-          <div className="mb-3">
-            <label className="form-label">Fecha de finalización: </label>
-            <DatePicker
-              value={enddate}
-              onChange={(date) => setEnddate(date)}
-              dateFormat="dd/MM/yyyy"
-              className="form-control"
-            />
+            <div className="mb-3">
+              <label className="form-label">Fecha de finalización: </label>
+              <DatePicker
+                value={enddate}
+                onChange={(date) => setEnddate(date)}
+                dateFormat="dd/MM/yyyy"
+                className="form-control"
+              />
+            </div>
           </div>
+          <div className="input-container">
+            <div className="mb-3">
+              <label className="form-label">Estudiante: </label>
+              <input
+                value={student}
+                onChange={(e) => setStudent(e.target.value)}
+                type="text"
+                className="form-control"
+              />
+            </div>
 
-          <div className="mb-3">
-            <label className="form-label">Estudiante: </label>
-            <input
-              value={student}
-              onChange={(e) => setStudent(e.target.value)}
-              type="text"
-              className="form-control"
-            />
-          </div>
-
-          <div className="mb-3">
-            <label className="form-label">Horario: </label>
-            <TimePicker
-              onChange={setSchedule}
-              value={schedule}
-              className="form-control"
-              disableClock={true}
-            />
+            <div className="mb-3">
+              <label className="form-label">Horario: </label>
+              <TimePicker
+                onChange={setSchedule}
+                value={schedule}
+                className="form-control"
+                disableClock={true}
+              />
+            </div>
           </div>
 
           <div className="mb-3">

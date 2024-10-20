@@ -88,7 +88,7 @@ const linksArray = [
   {
     label: "Deportes",
     icon: <MdOutlineSportsBaseball/>,
-    to: "/",
+    to: "/sport",
   },
   {
     label: "Estudiantes",

@@ -52,16 +52,14 @@ const CompCreateActivity = () => {
             </div>
           </div>
 
-          <div className="input-container">
-            <div className="mb-3">
-              <label className="form-label">Fecha: </label>
-              <DatePicker
-                value={dateActivity}
-                onChange={(date) => setDateActivity(date)}
-                dateFormat="dd/MM/yyyy"
-                className="form-control"
-              />
-            </div>
+          <div className="mb-3">
+            <label className="form-label">Fecha: </label>
+            <DatePicker
+              value={dateActivity}
+              onChange={(date) => setDateActivity(date)}
+              dateFormat="dd/MM/yyyy"
+              className="form-control"
+            />
           </div>
 
           <div className="mb-3">

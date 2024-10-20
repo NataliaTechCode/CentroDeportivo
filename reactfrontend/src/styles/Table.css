@@ -5,48 +5,56 @@
   margin: 10px;
   background-color: transparent;
   border-collapse: collapse;
+  border: 1px solid #dee2e6; /* Borde externo de la tabla */
 }
 
 .custom-table th,
 .custom-table td {
+  max-width: 300px;
+  max-height: 50px;
+  align-items: center;
+  justify-content: center;
   padding: 0.75rem;
-  vertical-align: top;
-  border-top: 1px solid #dee2e6;
+  vertical-align: center;
+  border: 1px solid #dee2e6; /* Borde entre las celdas */
 }
 
 .custom-table thead th {
+  align-items: center;
+  justify-content: center;
   background-color: #f9a11b;
   border-bottom: 2px solid #dee2e6;
 }
 
 .custom-table tbody tr:nth-of-type(odd) {
-  /* background-color: rgba(0, 0, 0, 0.05); */
-  /* background-color: #bfd743; */
   background-color: rgba(153, 200, 68, 0.3);
 }
 
-.custom-table {
-  border: 1px solid #dee2e6;
+.custom-table th  {
+  text-align: center;
+}
+.custom-table td {
+  text-align: center;
 }
 
-.custom-table th {
-  text-align: left;
+.custom-table td .button-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; 
 }
 
 .button-icon {
-  width: 40px; /* Ancho del botón */
-  height: 40px; /* Alto del botón */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #000; /* Borde negro */
-  /* border-radius: 5px; */
+  width: 40px;
+  height: 40px;
+  border: 1px solid #000;
 }
 
 .button-icon svg {
   color: black;
   font-size: 24px;
 }
+
 #edit {
   background-color: #f9dc1c;
 }
@@ -55,16 +63,17 @@
   background-color: #99c844;
 }
 
-#eye{
+#eye {
   background-color: #188fd1;
 }
+
+/* Botón para agregar */
 .button-add {
-  width: 100px; /* Ancho del botón */
-  height: 40px; /* Alto del botón */
+  width: 100px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid #000;  */
   margin: 20px;
   border-radius: 5px;
   background-color: #4bbaf7;
@@ -75,5 +84,3 @@
   color: black;
   font-size: 25px;
 }
-
-

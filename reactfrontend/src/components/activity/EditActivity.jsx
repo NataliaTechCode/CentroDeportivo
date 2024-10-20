@@ -29,10 +29,10 @@ const CompEditActivity = () => {
 
   const getActivityByid = useCallback(async () => {
     const res = await axios.get(URI + id);
-    setNameactivity(res.data.name);
-    setDescription(res.data.lastname);
-    setDateActivity(res.data.ci);
-    setPhoto(res.data.birth);
+    setNameactivity(res.data.nameactivity);
+    setDescription(res.data.description);
+    setDateActivity(res.data.dateActivity);
+    setPhoto(res.data.photo);
   }, [id]);
 
   useEffect(() => {
@@ -44,26 +44,25 @@ const CompEditActivity = () => {
       <div>
         <h1>Editar Actividad</h1>
         <form onSubmit={update}>
-          <div className="input-container">
-            <div className="mb-3">
-              <label className="form-label">Nombre de la actividad: </label>
-              <input
-                value={nameactivity}
-                onChange={(e) => setNameactivity(e.target.value)}
-                type="text"
-                className="form-control"
-              />
-            </div>
+          <div className="mb-3">
+            <label className="form-label">Nombre de la actividad: </label>
+            <input
+              value={nameactivity}
+              onChange={(e) => setNameactivity(e.target.value)}
+              type="text"
+              className="form-control"
+            />
+          </div>
 
-            <div className="mb-3">
-              <label className="form-label">Descripción: </label>
-              <input
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                type="text"
-                className="form-control"
-              />
-            </div>
+          <div className="mb-3">
+            <label className="form-label">Descripción: </label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              type="text"
+              className="form-control"
+              rows="2"
+            />
           </div>
 
           <div className="input-container"></div>
@@ -103,6 +102,7 @@ const Container = styled.div`
     font-weight: 600;
     color: #434c4b;
   }
+    
 `;
 
 export default CompEditActivity;

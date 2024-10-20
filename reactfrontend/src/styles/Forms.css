@@ -1,8 +1,13 @@
 .input-container {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
-
 .input-container input {
-    width: 400px; /* Cambia este valor para ajustar la longitud del input */
+  max-width: 4000px; 
+  }
+
+.input-container textarea {
+  max-width: 5px; /* El input se ajusta al ancho del contenedor */
+  height: 110px; /* Ajusta la altura */
   }
