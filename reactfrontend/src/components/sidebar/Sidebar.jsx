@@ -117,11 +117,11 @@ const linksArray = [
   },
 ];
 const secondarylinksArray = [
-  {
-    label: "Configuracion",
-    icon: <IoMdSettings />,
-    to: "/config",
-  },
+  // {
+  //   label: "Configuracion",
+  //   icon: <IoMdSettings />,
+  //   to: "/config",
+  // },
   {
     label: "Usuario",
     icon: <FaUser />,
