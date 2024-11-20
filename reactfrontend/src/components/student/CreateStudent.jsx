@@ -34,70 +34,80 @@ const CompCreateStudent = () => {
       <div>
         <h1>Añadir Estudiante</h1>
         <form onSubmit={Store}>
-          <div className="input-container">
-            <div className="mb-3">
-              <label className="form-label">Nombre: </label>
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                type="text"
-                className="form-control"
-              />
+          <div class="form-row">
+            <div class="form-column">
+              <div className="mb-3">
+                <label className="form-label">Nombre: </label>
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  className="form-control"
+                />
+              </div>
             </div>
+            <div class="form-column">
+              <div className="mb-3">
+                <label className="form-label">Apellido: </label>
+                <input
+                  value={lastname}
+                  onChange={(e) => setLastname(e.target.value)}
+                  type="text"
+                  className="form-control"
+                />
+              </div>
+            </div>
+          </div>
 
+          <div class="form-row">
+            <div class="form-column">
+              <div className="mb-3">
+                <label className="form-label">CI: </label>
+                <input
+                  value={ci}
+                  onChange={(e) => setCi(e.target.value)}
+                  type="text"
+                  className="form-control"
+                />
+              </div>
+            </div>
+            <div class="form-column">
+              <div className="mb-3">
+                <label className="form-label">Teléfono: </label>
+                <input
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  type="text"
+                  className="form-control"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-field">
             <div className="mb-3">
-              <label className="form-label">Apellido: </label>
-              <input
-                value={lastname}
-                onChange={(e) => setLastname(e.target.value)}
-                type="text"
+              <label className="form-label">Fecha de nacimiento: </label>
+              <DatePicker
+                value={birth}
+                onChange={(date) => setBirth(date)}
+                dateFormat="dd/MM/yyyy" // Formato de la fecha
                 className="form-control"
               />
             </div>
           </div>
 
-          <div className="input-container">
+          <div class="form-field">
             <div className="mb-3">
-              <label className="form-label">CI: </label>
+              <label className="form-label">Foto del Estudiante: </label>
               <input
-                value={ci}
-                onChange={(e) => setCi(e.target.value)}
-                type="text"
-                className="form-control"
-              />
-            </div>
-
-            <div className="mb-3">
-              <label className="form-label">Teléfono: </label>
-              <input
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                value={photostudent}
+                onChange={(e) => setPhotostudent(e.target.value)}
                 type="text"
                 className="form-control"
               />
             </div>
           </div>
-          
-          <div className="mb-3">
-            <label className="form-label">Fecha de nacimiento: </label>
-            <DatePicker
-              value={birth}
-              onChange={(date) => setBirth(date)}
-              dateFormat="dd/MM/yyyy" // Formato de la fecha 
-              className="form-control"
-            />
-          </div>
-
-          <div className="mb-3">
-            <label className="form-label">Foto del Estudiante: </label>
-            <input
-              value={photostudent}
-              onChange={(e) => setPhotostudent(e.target.value)}
-              type="text"
-              className="form-control"
-            />
-          </div>
-
+    
           <button type="subimit" className="btn btn-primary">
             Guardar
           </button>

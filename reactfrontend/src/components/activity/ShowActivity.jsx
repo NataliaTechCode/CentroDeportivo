@@ -37,10 +37,10 @@ const CompShowActivity = () => {
               <thead>
                 <tr>
                   <th>N°</th>
-                  <th>Actividad</th>
+                  <th>Aviso</th>
                   <th>Descripción</th>
-                  <th>Fecha de la actividad</th>
-                  <th>Foto</th>
+                  <th>Fecha del aviso</th>
+                  {/* <th>Foto</th> */}
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -51,7 +51,7 @@ const CompShowActivity = () => {
                     <td>{activity.nameactivity}</td>
                     <td>{activity.description}</td>
                     <td>{activity.dateActivity}</td>
-                    <td>{activity.photo}</td>
+                    {/* <td>{activity.photo}</td> */}
                     <td>
                       <Link
                         to={`/activity/edit/${activity.id}`}

@@ -23,6 +23,7 @@ const searchSport = async (req, res) => {
   }
 };
 
+
 const addSport = async (req, res) => {
   try {
     const { idsport, namesport } = req.body;

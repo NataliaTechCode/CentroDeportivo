@@ -9,7 +9,7 @@ class User {
     this.email = email;
     this.role = role;
     this.permissions = permissions;
-    this.createdAt = createdAt;
+    // this.createdAt = createdAt;
   }
 
   static async getUser() {
@@ -38,6 +38,7 @@ class User {
   }
   static async addUser(data) {
     try {
+      console.log(data)
       const snapshot = await db.collection("user").get();
       const users = snapshot.docs.map((doc) => ({
         id: doc.id,

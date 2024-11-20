@@ -1,0 +1,28 @@
+
+.select-container {
+    position: relative;
+    flex: 1;
+  }
+  
+  /* Estilo del select */
+  .form-control {
+    width: 100%;
+    padding-right: 30px; /* Espacio para el ícono */
+    font-size: 16px;
+  }
+  
+  /* Estilo de la flecha */
+  .arrow-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%) rotate(0deg); /* Rotación inicial */
+    transition: transform 0.3s ease; /* Transición suave */
+    pointer-events: none; /* Evitar interferencia con clics */
+  }
+  
+  /* Rotación al abrir */
+  .arrow-icon.open {
+    transform: translateY(-50%) rotate(90deg); /* Rotación hacia abajo */
+  }
+  

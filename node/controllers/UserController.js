@@ -1,4 +1,5 @@
 const User = require("../models/UserModel");
+const bcrypt = require("bcrypt");
 
 const getUser = async (req, res) => {
   try {
@@ -23,19 +24,27 @@ const searchUser = async (req, res) => {
   }
 };
 
-
 const addUser = async (req, res) => {
   try {
-    const { iduser, name, username, password, email, role, permissions,createdAt } =
-      req.body;
-    const userId = await User.addUser({
+    const {
       iduser,
       name,
       username,
       password,
+      email,
       role,
       permissions,
-      createdAt,
+      
+    } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const userId = await User.addUser({
+      iduser,
+      name,
+      username,
+      password: hashedPassword,
+      email,
+      role,
+      permissions
     });
     res
       .status(200)
@@ -51,7 +60,7 @@ const updateUser = async (req, res) => {
   const data = req.body;
 
   try {
-    const Userupdate = await User.updateUser(id,data);
+    const Userupdate = await User.updateUser(id, data);
     res.status(200).send(Userupdate);
   } catch (error) {
     res.status(500).send({ error: "Error al editar usuario" });
@@ -73,5 +82,5 @@ module.exports = {
   searchUser,
   addUser,
   updateUser,
-  deleteUser
+  deleteUser,
 };

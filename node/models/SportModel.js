@@ -32,6 +32,7 @@ class Sport {
     }
   }
 
+
   static async addSport(data) {
     try {
       const snapshot = await db.collection("sport").get();

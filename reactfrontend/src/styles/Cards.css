@@ -1,0 +1,35 @@
+.cards-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around; /* Espaciado uniforme entre tarjetas */
+  flex-wrap: wrap; /* Permite que las tarjetas pasen a otra fila si el espacio no es suficiente */
+  gap: 16px; /* Espaciado entre tarjetas */
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 200px;
+  height: 100px;
+}
+
+.card-icon {
+  margin-right: 15px;
+  color: #4caf50; /* Color para el ícono */
+}
+
+.card-content h2 {
+  font-size: 24px;
+  margin: 0;
+  color: #333;
+}
+
+.card-content p {
+  font-size: 16px;
+  margin: 0;
+  color: #777;
+}

@@ -42,33 +42,33 @@ const CompEditActivity = () => {
   return (
     <Container>
       <div>
-        <h1>Editar Actividad</h1>
+        <h1>Editar Aviso</h1>
         <form onSubmit={update}>
-          <div className="mb-3">
-            <label className="form-label">Nombre de la actividad: </label>
-            <input
-              value={nameactivity}
-              onChange={(e) => setNameactivity(e.target.value)}
-              type="text"
-              className="form-control"
-            />
+          <div className="form-field">
+            <div className="mb-3">
+              <label className="form-label">Nombre del avios: </label>
+              <input
+                value={nameactivity}
+                onChange={(e) => setNameactivity(e.target.value)}
+                type="text"
+                className="form-control"
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Descripción: </label>
+              <input
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                type="text"
+                className="form-control"
+                rows="2"
+              />
+            </div>
           </div>
 
           <div className="mb-3">
-            <label className="form-label">Descripción: </label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              type="text"
-              className="form-control"
-              rows="2"
-            />
-          </div>
-
-          <div className="input-container"></div>
-
-          <div className="mb-3">
-            <label className="form-label">Fecha de la actividad: </label>
+            <label className="form-label">Fecha: </label>
             <DatePicker
               value={dateActivity}
               onChange={(date) => setDateActivity(date)}
@@ -77,15 +77,15 @@ const CompEditActivity = () => {
             />
           </div>
 
-          <div className="mb-3">
-            <label className="form-label">Foto:</label>
+          {/* <div className="mb-3">
+            <label className="form-label">Foto: </label>
             <input
               value={photo}
               onChange={(e) => setPhoto(e.target.value)}
               type="text"
               className="form-control"
             />
-          </div>
+          </div> */}
 
           <button type="subimit" className="btn btn-primary">
             Guardar
@@ -102,7 +102,6 @@ const Container = styled.div`
     font-weight: 600;
     color: #434c4b;
   }
-    
 `;
 
 export default CompEditActivity;

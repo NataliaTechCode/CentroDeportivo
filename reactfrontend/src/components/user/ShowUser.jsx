@@ -54,7 +54,7 @@ const CompShowUsers = () => {
                     <td>{user.iduser}</td>
                     <td>{user.name}</td>
                     <td>{user.username}</td>
-                    <td>{user.password}</td>
+                    <td>{'*'.repeat(Math.floor(user.password.length / 2))}</td>
                     <td>{user.email}</td>
                     <td>{user.role}</td>
                     {/* <td>{user.createdAt}</td> */}

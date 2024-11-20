@@ -1,5 +1,3 @@
-// import logo from "./logo.svg";
-
 import React, { useState } from "react";
 import styled from "styled-components";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
@@ -9,8 +7,9 @@ import { ThemeProvider } from "styled-components";
 import "./styles/Table.css";
 import "./styles/Forms.css";
 
-//importamos Componentes
+//importacion de Componentes
 import Login from "./components/login/Login";
+
 import CompShowStudents from "./components/student/ShowStudent";
 import CompCreateStudent from "./components/student/CreateStudent";
 import CompEditStudent from "./components/student/EditStudent";
@@ -24,16 +23,24 @@ import CompCreateCoach from "./components/coach/CreateCoach";
 import CompEditCoach from "./components/coach/EditCoach";
 
 import CompShowMonthly from "./components/monthly/ShowMonthly";
-import CompCreateMonthly from "./components/monthly/CreateMonthly"
+import CompCreateMonthly from "./components/monthly/CreateMonthly";
 import CompEditMonthly from "./components/monthly/EditMonthly";
 
-import CompShowActivity from "./components/activity/ShowActivity"
+import CompShowActivity from "./components/activity/ShowActivity";
 import CompCreateActivity from "./components/activity/CreateActivity";
 import CompEditActivity from "./components/activity/EditActivity";
 
 import CompShowSport from "./components/sport/ShowSport";
+import SportsList from "./components/sport/Sports";
 import CompCreateSport from "./components/sport/CreateSport";
 import CompEditSport from "./components/sport/EditSport";
+
+import CompShowSchedule from "./components/schedule/ShowSchedule";
+import CompShowScheduleSport from "./components/schedule/ShowScheduleSport";
+import CompCreateSchedule from "./components/schedule/CreateSchedule";
+import CompEditSchedule from "./components/schedule/EditSchedule";
+
+//dashboard
 
 export const ThemeContext = React.createContext(null);
 
@@ -42,16 +49,26 @@ function App() {
   const themeStyle = theme === "light" ? Light : Dark;
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
     <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-      </header>
       <ThemeContext.Provider value={{ setTheme, theme }}>
         <ThemeProvider theme={themeStyle}>
           <BrowserRouter>
+            <Routes>
+              <Route
+                path="/login"
+                element={
+                  isAuthenticated ? (
+                    <Navigate to="/student" />
+                  ) : (
+                    <Login setIsAuthenticated={setIsAuthenticated} />
+                  )
+                }
+              />
+            </Routes>
+
             <Container className={sidebarOpen ? "sidebarState active" : ""}>
               {isAuthenticated && (
                 <Sidebar
@@ -59,41 +76,62 @@ function App() {
                   setSidebarOpen={setSidebarOpen}
                 />
               )}
+
               <Routes>
                 <Route
-                  path="/login"
+                  path="/student"
                   element={
                     isAuthenticated ? (
-                      <Navigate to="/" />
+                      <CompShowStudents />
                     ) : (
-                      <Login setIsAuthenticated={setIsAuthenticated} />
+                      <Navigate to="/login" />
                     )
                   }
                 />
-                <Route path="/student" element={<CompShowStudents/>} />
-                <Route path="/student/create" element={<CompCreateStudent/>} />
-                <Route path="/student/edit/:id" element={<CompEditStudent/>} />
 
-                <Route path="/user" element={<CompShowUsers/>} />
-                <Route path="/user/create" element={<CompCreateUser/>} />
-                <Route path="/user/edit/:id" element={<CompEditUser/>} />
+                <Route path="/student/create" element={<CompCreateStudent />} />
+                <Route path="/student/edit/:id" element={<CompEditStudent />} />
 
-                <Route path="/coach" element={<CompShowCoach/>} />
-                <Route path="/coach/create" element={<CompCreateCoach/>} />
-                <Route path="/coach/edit/:id" element={<CompEditCoach/>} />
+                <Route path="/user" element={<CompShowUsers />} />
+                <Route path="/user/create" element={<CompCreateUser />} />
+                <Route path="/user/edit/:id" element={<CompEditUser />} />
 
-                <Route path="/monthly" element={<CompShowMonthly/>} />
-                <Route path="/monthly/create" element={<CompCreateMonthly/>} />
-                <Route path="/monthly/edit/:id" element={<CompEditMonthly/>} />
+                <Route path="/coach" element={<CompShowCoach />} />
+                <Route path="/coach/create" element={<CompCreateCoach />} />
+                <Route path="/coach/edit/:id" element={<CompEditCoach />} />
 
-                <Route path="/activity" element={<CompShowActivity/>} />
-                <Route path="/activity/create" element={<CompCreateActivity/>} />
-                <Route path="/activity/edit/:id" element={<CompEditActivity/>} />
+                <Route path="/monthly" element={<CompShowMonthly />} />
+                <Route path="/monthly/create" element={<CompCreateMonthly />} />
+                <Route path="/monthly/edit/:id" element={<CompEditMonthly />} />
 
-                <Route path="/sport" element={<CompShowSport/>} />
-                <Route path="/sport/create" element={<CompCreateSport/>} />
-                <Route path="/sport/edit/:id" element={<CompEditSport/>} />
+                <Route path="/activity" element={<CompShowActivity />} />
+                <Route
+                  path="/activity/create"
+                  element={<CompCreateActivity />}
+                />
+                <Route
+                  path="/activity/edit/:id"
+                  element={<CompEditActivity />}
+                />
 
+                <Route path="/sports" element={<SportsList />} />
+                <Route path="/sport" element={<CompShowSport />} />
+                <Route path="/sport/create" element={<CompCreateSport />} />
+                <Route path="/sport/edit/:id" element={<CompEditSport />} />
+
+                <Route path="/schedule" element={<CompShowSchedule />} />
+                <Route
+                  path="/sport/:sportName"
+                  element={<CompShowScheduleSport />}
+                />
+                <Route
+                  path="/sport/schedule/create"
+                  element={<CompCreateSchedule />}
+                />
+                <Route
+                  path="/schedule/edit/:id"
+                  element={<CompEditSchedule />}
+                />
               </Routes>
             </Container>
           </BrowserRouter>

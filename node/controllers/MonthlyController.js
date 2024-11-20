@@ -25,12 +25,14 @@ const searchMonthly = async (req, res) => {
 
 const addMonthly = async (req, res) => {
     try {
-    const { idmonthly, startdate, enddate, student, schedule, state } = req.body;
+    const { idmonthly, startdate, enddate, student, ci, sport, schedule, state } = req.body;
     const monthlyId = await Monthly.addMonthly({
       idmonthly,
       startdate,
       enddate,
       student,
+      ci,
+      sport,
       schedule,
       state
     });

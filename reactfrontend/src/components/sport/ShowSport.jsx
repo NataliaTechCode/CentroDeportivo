@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { MdEdit, MdDelete } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
+import { FaEye } from "react-icons/fa";
 
 const URI = "http://localhost:4000/api/deporte/";
 
@@ -29,9 +30,14 @@ const CompShowSport = () => {
     <div className="container">
       <div className="row">
         <div className="col">
-          <Link to="/sport/create" className="button-add">
-            <IoMdAddCircle /> Añadir
-          </Link>
+          <div className="button-container">
+            <Link to="/sport/create" className="button-add">
+              <IoMdAddCircle /> Añadir
+            </Link>
+            {/* <Link to="/sport/schedule" className="button-schedule">
+              <FaEye /> Horarios
+            </Link> */}
+          </div>
           <div class="table-container">
             <table className="custom-table">
               <thead>

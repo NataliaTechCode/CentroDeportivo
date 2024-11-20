@@ -80,7 +80,25 @@
   color: black;
 }
 
-.button-add svg {
+.button-add svg,
+.button-schedule svg {
   color: black;
   font-size: 25px;
+  margin: 4px;
+}
+
+.button-container {
+  display: flex;
+}
+
+.button-schedule{
+  width: 125px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  border-radius: 5px;
+  background-color: #99c844;
+  color: black;
 }

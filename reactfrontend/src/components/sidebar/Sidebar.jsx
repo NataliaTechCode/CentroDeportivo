@@ -12,7 +12,7 @@ import { VscGraphLine } from "react-icons/vsc";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { IoMdSettings } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaRegClock   } from "react-icons/fa";
 import { GiWhistle } from "react-icons/gi";
 
 export function Sidebar({ sidebarOpen, setSidebarOpen }) {
@@ -88,7 +88,12 @@ const linksArray = [
   {
     label: "Deportes",
     icon: <MdOutlineSportsBaseball/>,
-    to: "/sport",
+    to: "/sports",
+  },
+  {
+    label: "Horarios",
+    icon: <FaRegClock  />,
+    to: "/schedule",
   },
   {
     label: "Estudiantes",
@@ -111,9 +116,19 @@ const linksArray = [
     to: "/dashboard",
   },
   {
-    label: "Actividades",
+    label: "Avisos",
     icon: <AiFillThunderbolt />,
     to: "/activity",
+  },
+  {
+    label: "Avisos",
+    icon: <AiFillThunderbolt />,
+    to: "/prueba",
+  },
+  {
+    label: "Avisos",
+    icon: <AiFillThunderbolt />,
+    to: "/dass",
   },
 ];
 const secondarylinksArray = [

@@ -7,4 +7,5 @@ admin.initializeApp({
 });
 
 const db = admin.firestore(); // Para Firestore
+// const bucket = admin.storage().bucket();
 module.exports = { db };

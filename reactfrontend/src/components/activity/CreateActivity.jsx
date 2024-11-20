@@ -28,11 +28,11 @@ const CompCreateActivity = () => {
   return (
     <Container>
       <div>
-        <h1>Añadir Actividad</h1>
+        <h1>Añadir Aviso</h1>
         <form onSubmit={Store}>
-          <div className="input-container">
+          <div className="form-field">
             <div className="mb-3">
-              <label className="form-label">Nombre de la actividad: </label>
+              <label className="form-label">Nombre del avios: </label>
               <input
                 value={nameactivity}
                 onChange={(e) => setNameactivity(e.target.value)}
@@ -48,6 +48,7 @@ const CompCreateActivity = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 type="text"
                 className="form-control"
+                rows="2"
               />
             </div>
           </div>
@@ -62,7 +63,7 @@ const CompCreateActivity = () => {
             />
           </div>
 
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="form-label">Foto: </label>
             <input
               value={photo}
@@ -70,7 +71,7 @@ const CompCreateActivity = () => {
               type="text"
               className="form-control"
             />
-          </div>
+          </div> */}
 
           <button type="subimit" className="btn btn-primary">
             Guardar

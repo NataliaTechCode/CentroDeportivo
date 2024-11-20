@@ -1,4 +1,5 @@
 const { db } = require("../database/firebase");
+// const { storage, ref, uploadBytes, getDownloadURL } = require('../database/firebase');
 
 class Student {
   constructor(idstudent, name, lastname, ci, birth, phone, photostudent) {

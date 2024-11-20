@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const URI = "http://localhost:4000/api/estudiante";
+const URI = "http://localhost:4000/api/usuario";
 
 const CompCreateUser = () => {
   const [name, setName] = useState("");
@@ -11,19 +11,19 @@ const CompCreateUser = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
-  // const [permissions, setPermissions] = useState("");
+  const [permissions, setPermissions] = useState("");
   const navigate = useNavigate();
 
   //Procedimiento guardar
   const Store = async (e) => {
     e.preventDefault();
     await axios.post(URI, {
-        name: name,
-        username: username,
-        password: password,
-        email: email,
-        role: role,
-        // permissions: permissions,
+      name: name,
+      username: username,
+      password: password,
+      email: email,
+      role: role,
+      permissions: permissions,
     });
     navigate("/");
   };
@@ -31,9 +31,8 @@ const CompCreateUser = () => {
   return (
     <Container>
       <div>
-        <h1>Añadir Estudiante</h1>
+        <h1>Añadir Usuario</h1>
         <form onSubmit={Store}>
-
           <div className="input-container">
             <div className="mb-3">
               <label className="form-label">Nombre: </label>
@@ -79,24 +78,24 @@ const CompCreateUser = () => {
           </div>
 
           <div className="mb-3">
-              <label className="form-label">Rol: </label>
-              <input
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                type="text"
-                className="form-control"
-              />
-            </div>
+            <label className="form-label">Rol: </label>
+            <input
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              type="text"
+              className="form-control"
+            />
+          </div>
 
-          {/* <div className="mb-3">
-            <label className="form-label">Foto del Estudiante: </label>
+          <div className="mb-3">
+            <label className="form-label">Permisos: </label>
             <input
               value={permissions}
               onChange={(e) => setPermissions(e.target.value)}
               type="text"
               className="form-control"
             />
-          </div> */}
+          </div>
 
           <button type="subimit" className="btn btn-primary">
             Guardar
