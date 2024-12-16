@@ -46,11 +46,18 @@ export function Sidebar({ sidebarOpen, setSidebarOpen, setIsAuthenticated }) {
         </div>
       ))}
       <Divider />
-      {secondarylinksArray.map(({ icon, label, to }) => (
+      {secondarylinksArray.map(({ icon, label, to, onClick }) => (
         <div className="LinkContainer" key={label}>
           <NavLink
             to={to}
             className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
+            onClick={(e) => {
+              if (onClick) onClick(e); // Si la función `onClick` existe, la ejecuta
+              const token = localStorage.getItem("token"); // Verifica el token en el localStorage
+              if (!token) {
+                setIsAuthenticated(false); // Si no hay token, desautentica al usuario
+              }
+            }}
           >
             <div className="Linkicon">{icon}</div>
             {sidebarOpen && <span>{label}</span>}
@@ -136,11 +143,15 @@ const secondarylinksArray = [
     icon: <FaUser />,
     to: "/user",
   },
-  // {
-  //   label: "Salir",
-  //   icon: <CiLogout />,
-  //   to: "/login",
-  // },
+  {
+    label: "Salir",
+    icon: <CiLogout />,
+    to: "/login",
+    onClick: () => {
+      localStorage.removeItem("token");
+      // Si tienes un estado para manejar la autenticación
+    },
+  },
 ];
 //#endregion
 

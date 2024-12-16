@@ -7,9 +7,9 @@ const Line = ({ data }) => (
     xScale={{ type: "point" }}
     yScale={{
       type: "linear",
-      min: "auto",
+      min: 0,
       max: "auto",
-      stacked: true,
+      stacked: false,
       reverse: false,
     }}
     yFormat=" >-.2f"
@@ -28,7 +28,7 @@ const Line = ({ data }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "count",
+      legend: "Cantidad",
       legendOffset: -40,
       legendPosition: "middle",
       truncateTickAt: 0,

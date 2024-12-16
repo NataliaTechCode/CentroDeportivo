@@ -20,26 +20,56 @@ const useDatos = () => {
   const [monthlySports, setMonthlySports] = useState([]);
   const [mothSports, setMothSports] = useState([]);
 
-  // const getMonth = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:4000/api/mensualidad/");
-  //     if (!response.ok) {
-  //       throw new Error(`Error en la solicitud: ${response.status}`);
-  //     }
-  //     const data = await response.json();
-  //     setMonthlyData(data);
-  //   } catch (error) {
-  //     console.error("Error al obtener los datos de mensualidad:", error);
-  //   }
-  // };
-
   // Inicializar datos
   useEffect(() => {
-    setMonthlyData(monthly);
-    setStudentData(student);
-    setSportsData(sport);
-    setCoachData(coach);
-    setScheduleData(schedule);
+    console.log("Ejecutando useEffect para obtener datos"); // Indicador de ejecución del useEffect
+
+    const fetchData = async () => {
+      try {
+        console.log("Llamando a la API"); // Indicador de inicio de la llamada a la API
+        const [
+          monthlyResponse,
+          studentResponse,
+          sportResponse,
+          coachResponse,
+          scheduleResponse,
+        ] = await Promise.all([
+          fetch("http://localhost:4000/api/mensualidad/"),
+          fetch("http://localhost:4000/api/estudiante/"),
+          fetch("http://localhost:4000/api/deporte/"),
+          fetch("http://localhost:4000/api/entrenador/"),
+          fetch("http://localhost:4000/api/horario/"),
+        ]);
+
+        if (
+          !monthlyResponse.ok ||
+          !studentResponse.ok ||
+          !sportResponse.ok ||
+          !coachResponse.ok ||
+          !scheduleResponse.ok
+        ) {
+          throw new Error("Error en una de las solicitudes");
+        }
+
+        const monthlyData = await monthlyResponse.json();
+        const studentData = await studentResponse.json();
+        const sportsData = await sportResponse.json();
+        const coachData = await coachResponse.json();
+        const scheduleData = await scheduleResponse.json();
+
+        setMonthlyData(monthlyData);
+        setStudentData(studentData);
+        setSportsData(sportsData);
+        setCoachData(coachData);
+        setScheduleData(scheduleData);
+
+        console.log("Datos obtenidos y guardados correctamente"); // Indicador de éxito
+      } catch (error) {
+        console.error("Error al obtener los datos:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   // Filtrar estudiantes con mensualidad activa
@@ -157,6 +187,7 @@ const useDatos = () => {
 
   // Calcular mensualidades por mes
   useEffect(() => {
+    console.log("en datoos");
     if (!sportsData.length || !monthlyData.length) return;
 
     const dataBySport = sportsData.map((sport) => {
@@ -167,9 +198,24 @@ const useDatos = () => {
       );
 
       sportEnrollments.forEach((student) => {
-        const startDate = new Date(student.startdate);
-        const month = startDate.getMonth();
-        monthlyCounts[month] += 1;
+        try {
+          const startDate = new Date(student.startdate);
+
+          // Si startDate no es válido, simplemente ignoramos este estudiante sin imprimir nada
+          if (isNaN(startDate)) {
+            return; // Salta el procesamiento de este estudiante
+          }
+
+          const month = startDate.getMonth();
+
+          // Si month no está en el rango 0-11, ignoramos este estudiante sin mostrar un error
+          if (month >= 0 && month <= 11) {
+            monthlyCounts[month] += 1;
+          }
+        } catch (error) {
+          // En caso de que haya un error (por ejemplo, si `student.startdate` está mal formateado), lo ignoramos
+          return;
+        }
       });
 
       const formattedData = monthlyCounts.map((count, index) => ({
@@ -177,6 +223,7 @@ const useDatos = () => {
         y: count,
       }));
 
+      console.log("en datoos final");
       return {
         id: sport.namesport,
         data: formattedData,
@@ -206,6 +253,7 @@ const useDatos = () => {
 
   // Datos totales de estudiantes y entrenadores
   useEffect(() => {
+    // getStudents();
     setAllstudents(studentData.length);
     setAllcoach(coachData.length);
   }, [studentData, coachData]);

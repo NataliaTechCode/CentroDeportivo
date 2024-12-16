@@ -12,12 +12,11 @@ const LoginComponent = ({ setIsAuthenticated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("SAda");
       const response = await login(user, password);
       localStorage.setItem("token", response.token); // Guardar token en el localStorage
       console.log("sada");
       const hasToken = !!localStorage.getItem("token");
-      alert("Inicio de sesión exitoso");
+      // alert("Inicio de sesión exitoso");
       setIsAuthenticated(true);
       console.log("Token recibido:", response.token);
       console.log(hasToken);
