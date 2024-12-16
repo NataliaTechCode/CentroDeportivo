@@ -1,71 +1,57 @@
-import React from 'react';
-import { Card, Title, Text, BarChart, LineChart, DonutChart, Grid, Col } from '@tremor/react';
-import Cards from './das';
+import Cards from "./graphics/Cards";
+import BartChart from "./graphics/BartChart";
+// import Marimekko from "./graphics/MarimekkoChart";
+import Pie from "./graphics/PieChart";
+import BartHorizontal from "./graphics/BartHorizontal";
+import Line from "./graphics/LineChart";
+import "../../styles/Dashboard.css";
 
+// import useFetchData from "../../hooks/useFetchData";
+import useDatos from "../../hooks/datoss";
 
-const Dashboard = () => {
-  // Datos de ejemplo para los gráficos
-  const barChartData = [
-    { category: 'Enero', ventas: 50 },
-    { category: 'Febrero', ventas: 80 },
-    { category: 'Marzo', ventas: 65 },
-  ];
+const ShowDashboard = () => {
+  // const { students, allStudents, coach } = useFetchData();
+  // const { activeStudentsData, scheduleData, monthlyClassification } =
+  //   useFetchData([]);
 
-  const lineChartData = [
-    { date: '2024-01-01', value: 30 },
-    { date: '2024-02-01', value: 60 },
-    { date: '2024-03-01', value: 50 },
-  ];
+  const { students, allstudents, allcoach } = useDatos();
+  const { studentSports, scheduleSports, monthlySports, mothSports } = useDatos(
+    []
+  );
 
-  const donutChartData = [
-    { name: 'Producto A', value: 50 },
-    { name: 'Producto B', value: 35 },
-    { name: 'Producto C', value: 25 },
-  ];
+  // console.log(mothSports);
+  // const data3 = Array.isArray(activeStudentsData) ? activeStudentsData : [];
 
   return (
-    <div className="p-6">
-      <Title>Dashboard</Title>
+    <div>
+      <div className="cards-container">
+        <Cards
+          title="Estudiantes Actuales"
+          value={allstudents}
+          color="#124b98"
+        />
+        <Cards title="Total Estudiantes" value={students} color="#f9a11b" />
+        <Cards title="Total Entrenadores" value={allcoach} color="#f9dc1c" />
+      </div>
+      <div className="chartlong marimekko">
+        <Line data={mothSports} />
+      </div>
+      <div className="dashboard">
+        <div className="chart pie-chart">
+          <Pie data={studentSports} />
+        </div>
+        <div className="chart bar-chart">
+          <BartChart data={monthlySports}></BartChart>
+        </div>
+      </div>
 
-      <Grid numItems={2} className="gap-6 mt-6">
-        {/* Tarjetas */}
-        <Col numColSpan={1}>
-          <Card>
-            <Title>Total Ventas</Title>
-            <Text>$15,000</Text>
-          </Card>
-        </Col>
-        <Col numColSpan={1}>
-          <Card>
-            <Title>Nuevos Usuarios</Title>
-            <Text>150</Text>
-          </Card>
-        </Col>
-      </Grid>
-
-      <Grid numItems={3} className="gap-6 mt-6">
-        {/* Gráficos */}
-        <Col numColSpan={1}>
-          <Card>
-            <Title>Ventas por Mes</Title>
-            <BarChart data={barChartData} category="ventas" index="category" />
-          </Card>
-        </Col>
-        <Col numColSpan={1}>
-          <Card>
-            <Title>Usuarios Activos</Title>
-            <LineChart data={lineChartData} category="value" index="date" />
-          </Card>
-        </Col>
-        <Col numColSpan={1}>
-          <Card>
-            <Title>Distribución de Productos</Title>
-            <DonutChart data={donutChartData} category="value" index="name" />
-          </Card>
-        </Col>
-      </Grid>
+      <div className="dashboard">
+        <div className="chartlong pie-chart">
+          <BartHorizontal data={scheduleSports} />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default ShowDashboard;

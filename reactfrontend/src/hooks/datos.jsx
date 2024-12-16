@@ -1,0 +1,388 @@
+import { useState, useEffect } from "react";
+
+const useFetchData = () => {
+  const [students, setStudents] = useState(0);
+  const [allStudents, setAllStudents] = useState(0);
+  const [coach, setCoach] = useState(0);
+  const [activeStudentsData, setActiveStudentsData] = useState([]);
+  const [scheduleData, setScheduleData] = useState([]);
+  const [monthlyClassification, setMonthlyClassification] = useState([]);
+
+  const [sportsData, setSportsData] = useState([]);
+  const [monthlyDataBySport, setMonthlyDataBySport] = useState([]);
+
+  const [monthlyData, setMonthlyData] = useState([]);
+  const [studentData, setStudentData] = useState([]);
+  const [sportsData2, setSportsData2] = useState([]);
+  const [coachData, setCoachData] = useState([]);
+
+  const getMonthlyData2 = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/mensualidad");
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.status}`);
+      }
+      const data = await response.json();
+      setMonthlyData(data);
+    } catch (error) {
+      console.error("Error al obtener los datos de Mensualidades:", error);
+    }
+  };
+
+  const getStudentData2 = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/estudiante");
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.status}`);
+      }
+      const data = await response.json();
+      setStudentData(data);
+    } catch (error) {
+      console.error("Error al obtener los datos de Estudiantes:", error);
+    }
+  };
+
+  const getSportsData2 = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/deporte");
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.status}`);
+      }
+      const data = await response.json();
+      setSportsData2(data);
+    } catch (error) {
+      console.error("Error al obtener los datos de Deportes:", error);
+    }
+  };
+
+  const getCoachData2 = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/entrenador");
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.status}`);
+      }
+      const data = await response.json();
+      setCoachData(data);
+    } catch (error) {
+      console.error("Error al obtener los datos de Entrenadores:", error);
+    }
+  };
+
+  //////////////////////////////
+
+  const getMonthlyData = async () => {
+    try {
+      const filterStudentsByDate = (monthlyData) => {
+        const currentDate = new Date();
+
+        const activeStudents = monthlyData.filter((student) => {
+          const endDate = new Date(student.enddate);
+          return endDate >= currentDate; // Mensualidades vigentes
+        });
+
+        const uniqueActiveStudents = new Set(
+          activeStudents.map((student) => student.ci)
+        );
+
+        return uniqueActiveStudents.size;
+      };
+
+      const activeStudentCount = filterStudentsByDate(monthlyData);
+      setStudents(activeStudentCount); // Guardar la cantidad en el estado
+    } catch (error) {
+      console.error("Error al obtener los datos de mensualidad:", error);
+    }
+  };
+
+  const getStudentData = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/estudiante");
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.status}`);
+      }
+      const data = await response.json();
+
+      // Total de estudiantes que se inscribieron
+      setAllStudents(data.length);
+
+      setCoach(data.length);
+    } catch (error) {
+      console.error("Error al obtener los datos de estudiantes:", error);
+    }
+  };
+
+  const getCoachData = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/entrenador/");
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.status}`);
+      }
+      const data = await response.json();
+      setCoach(data.length);
+    } catch (error) {
+      console.error("Error al obtener los datos de entrenadores:", error);
+    }
+  };
+
+  const getActiveStudentsBySport = async () => {
+    try {
+      const sportsResponse = await fetch("http://localhost:4000/api/deporte");
+      if (!sportsResponse.ok) {
+        throw new Error(
+          `Error en la solicitud de deportes: ${sportsResponse.status}`
+        );
+      }
+      const sportsData = await sportsResponse.json();
+
+      const monthlyResponse = await fetch(
+        "http://localhost:4000/api/mensualidad/"
+      );
+      if (!monthlyResponse.ok) {
+        throw new Error(
+          `Error en la solicitud de mensualidades: ${monthlyResponse.status}`
+        );
+      }
+      const monthlyData = await monthlyResponse.json();
+
+      // Filtrar estudiantes con mensualidades vigentes
+      const currentDate = new Date();
+      const activeStudents = monthlyData.filter((student) => {
+        const endDate = new Date(student.enddate);
+        return endDate >= currentDate; // Mensualidades vigentes
+      });
+
+      // Crear array de objetos con formato requerido
+      const formattedData = sportsData.map((sport) => {
+        const studentCount = activeStudents.filter(
+          (student) => student.sport === sport.namesport
+        ).length;
+        return {
+          id: sport.namesport,
+          label: sport.namesport,
+          value: studentCount,
+        };
+      });
+
+      setActiveStudentsData(formattedData); // Guardar en el estado
+    } catch (error) {
+      console.error("Error al obtener datos de mensualidades vigentes:", error);
+    }
+  };
+
+  const getScheduleAvailability = async () => {
+    try {
+      const sportsResponse = await fetch("http://localhost:4000/api/deporte");
+      const schedulesResponse = await fetch(
+        "http://localhost:4000/api/horario"
+      );
+
+      if (!sportsResponse.ok || !schedulesResponse.ok) {
+        throw new Error("Error en la solicitud de deportes o horarios");
+      }
+
+      const sportsData = await sportsResponse.json();
+      const schedulesData = await schedulesResponse.json();
+
+      const formattedScheduleData = sportsData.map((sport) => {
+        const relatedSchedules = schedulesData.filter(
+          (schedule) =>
+            schedule.sport.toLowerCase() === sport.namesport.toLowerCase()
+        );
+
+        let available = 0;
+        let notAvailable = 0;
+
+        relatedSchedules.forEach((schedule) => {
+          const { totalstudents, limitStudents } = schedule;
+          console.log(totalstudents);
+          if (totalstudents >= limitStudents) {
+            notAvailable++;
+          } else {
+            available++;
+          }
+        });
+
+        return {
+          sport: sport.namesport,
+          Disponible: available,
+          "No Disponible": notAvailable,
+        };
+      });
+
+      setScheduleData(formattedScheduleData); // Guardar en el estado
+    } catch (error) {
+      console.error("Error al obtener datos de horarios:", error);
+    }
+  };
+
+  const fetchAndProcessData = async () => {
+    try {
+      const mensualidadesResponse = await fetch(
+        "http://localhost:4000/api/mensualidad"
+      );
+      if (!mensualidadesResponse.ok) {
+        throw new Error(
+          `Error al obtener mensualidades: ${mensualidadesResponse.status}`
+        );
+      }
+      const mensualidades = await mensualidadesResponse.json();
+
+      const deportesResponse = await fetch("http://localhost:4000/api/deporte");
+      if (!deportesResponse.ok) {
+        throw new Error(
+          `Error al obtener deportes: ${deportesResponse.status}`
+        );
+      }
+      const deportes = await deportesResponse.json();
+
+      const currentDate = new Date();
+      const DAYS_THRESHOLD = 7; // Número de días para la condición "Por vencer"
+
+      // Función para clasificar mensualidades
+      const classifyMonthly = (endDate) => {
+        const end = new Date(endDate);
+        const daysDifference = (end - currentDate) / (1000 * 60 * 60 * 24); // Diferencia en días
+        if (daysDifference > DAYS_THRESHOLD) {
+          return "Activa";
+        } else if (daysDifference > 0) {
+          return "Por Vencer";
+        } else {
+          return "Vencida";
+        }
+      };
+
+      const result = deportes.map((deporte) => {
+        const filteredBySport = mensualidades.filter(
+          (mensualidad) => mensualidad.sport === deporte.namesport
+        );
+
+        const counts = filteredBySport.reduce(
+          (acc, mensualidad) => {
+            const classification = classifyMonthly(mensualidad.enddate);
+            acc[classification] += 1;
+            return acc;
+          },
+          { Activa: 0, "Por Vencer": 0, Vencida: 0 }
+        );
+
+        return {
+          Deportes: deporte.namesport,
+          ...counts,
+        };
+      });
+
+      setMonthlyClassification(result);
+      return result;
+    } catch (error) {
+      console.error("Error procesando los datos:", error);
+    }
+  };
+
+  // Función para obtener los deportes
+  const getSportsData = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/deporte");
+      if (!response.ok) {
+        throw new Error(
+          `Error en la solicitud de deportes: ${response.status}`
+        );
+      }
+      const data = await response.json();
+      setSportsData(data);
+    } catch (error) {
+      console.error("Error al obtener los datos de deportes:", error);
+    }
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getMonthlyDataBySport = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/mensualidad");
+      if (!response.ok) {
+        throw new Error(
+          `Error en la solicitud de mensualidades: ${response.status}`
+        );
+      }
+      const data = await response.json();
+
+      // Crear un arreglo con la cantidad de inscripciones por mes para cada deporte
+      const dataBySport = sportsData.map((sport) => {
+        // Inicializamos los contadores para los meses
+        const monthlyCounts = Array(12).fill(0); // Contadores para los 12 meses
+
+        // Filtramos los estudiantes que se inscribieron en el deporte actual
+        const sportEnrollments = data.filter(
+          (student) => student.sport === sport.namesport
+        );
+
+        // Contamos cuántos estudiantes se inscribieron por cada mes
+        sportEnrollments.forEach((student) => {
+          const startDate = new Date(student.startdate);
+          const month = startDate.getMonth(); // Obtenemos el mes (0 - 11)
+          monthlyCounts[month] += 1;
+        });
+
+        // Convertimos los datos al formato requerido
+        const formattedData = monthlyCounts.map((count, index) => ({
+          x: getMonthName(index), // Obtener el nombre del mes
+          y: count, // Contador de estudiantes
+        }));
+
+        return {
+          id: sport.namesport, // El nombre del deporte
+          data: formattedData,
+        };
+      });
+
+      setMonthlyDataBySport(dataBySport); // Guardamos los datos en el estado
+    } catch (error) {
+      console.error("Error al obtener los datos de mensualidades:", error);
+    }
+  };
+
+  const getMonthName = (monthIndex) => {
+    const months = [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ];
+    return months[monthIndex];
+  };
+
+  useEffect(() => {
+    getMonthlyData();
+    getStudentData();
+    getCoachData();
+    getActiveStudentsBySport();
+    getScheduleAvailability();
+    fetchAndProcessData();
+    getSportsData();
+  }, []);
+
+  useEffect(() => {
+    if (sportsData.length > 0) {
+      getMonthlyDataBySport(); // Obtener las mensualidades por deporte una vez que tengamos los deportes
+    }
+  }, [getMonthlyDataBySport, sportsData]);
+
+  return {
+    students,
+    allStudents,
+    coach,
+    activeStudentsData,
+    scheduleData,
+    monthlyClassification,
+    monthlyDataBySport,
+  };
+};
+
+export default useFetchData;

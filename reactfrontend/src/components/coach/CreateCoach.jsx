@@ -17,7 +17,7 @@ const CompCreateCoach = () => {
       namecoach: namecoach,
       phone: phone,
     });
-    navigate("/");
+    navigate("/coach");
   };
 
   return (

@@ -24,7 +24,7 @@ const CompEditActivity = () => {
       dateActivity: dateActivity,
       photo: photo,
     });
-    navigate("/");
+    navigate("/activity");
   };
 
   const getActivityByid = useCallback(async () => {
@@ -46,7 +46,7 @@ const CompEditActivity = () => {
         <form onSubmit={update}>
           <div className="form-field">
             <div className="mb-3">
-              <label className="form-label">Nombre del avios: </label>
+              <label className="form-label">Nombre del aviso: </label>
               <input
                 value={nameactivity}
                 onChange={(e) => setNameactivity(e.target.value)}

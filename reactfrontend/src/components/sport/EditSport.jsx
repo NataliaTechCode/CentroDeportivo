@@ -17,7 +17,7 @@ const CompEditSport = () => {
     await axios.put(URI + id, {
       namesport: namesport,
     });
-    navigate("/");
+    navigate("/sports");
   };
 
   const getSportByid = useCallback(async () => {

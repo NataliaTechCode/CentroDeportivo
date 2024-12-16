@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 
-
-
 const URI = "http://localhost:4000/api/estudiante/";
 
 const CompShowStudents = () => {
@@ -59,7 +57,7 @@ const CompShowStudents = () => {
                   <th>CI</th>
                   <th>Teléfono</th>
                   <th>Edad</th>
-                  <th>Foto</th>
+                  {/* <th>Foto</th> */}
                   <th>Acción</th>
                 </tr>
               </thead>
@@ -72,11 +70,16 @@ const CompShowStudents = () => {
                     <td>{student.ci}</td>
                     <td>{student.phone}</td>
                     <td>{calculateAge(student.birth)}</td>
-                    <td>
-                      <img src={student.photostudent}
-                      style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
-                      
-                    </td>
+                    {/* <td>
+                      <img
+                        src={student.photostudent}
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </td> */}
                     {/* <td>{student.photostudent}</td> */}
                     {/* <td>{student.photostudent}</td> */}
                     <td>

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 import { MdEdit, MdDelete } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
-import { FaEye } from "react-icons/fa";
 
 const URI = "http://localhost:4000/api/usuario/";
 
@@ -54,7 +53,7 @@ const CompShowUsers = () => {
                     <td>{user.iduser}</td>
                     <td>{user.name}</td>
                     <td>{user.username}</td>
-                    <td>{'*'.repeat(Math.floor(user.password.length / 2))}</td>
+                    <td>{"*".repeat(Math.floor(user.password.length / 2))}</td>
                     <td>{user.email}</td>
                     <td>{user.role}</td>
                     {/* <td>{user.createdAt}</td> */}

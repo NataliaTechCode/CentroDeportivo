@@ -25,7 +25,7 @@ const CompCreateUser = () => {
       role: role,
       permissions: permissions,
     });
-    navigate("/");
+    navigate("/user");
   };
 
   return (
@@ -79,15 +79,17 @@ const CompCreateUser = () => {
 
           <div className="mb-3">
             <label className="form-label">Rol: </label>
-            <input
+            <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              type="text"
               className="form-control"
-            />
+            >
+              <option value="">Seleccione un rol</option>
+              <option value="Encargado">Encargado</option>
+              <option value="Administrador">Administrador</option>
+            </select>
           </div>
-
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="form-label">Permisos: </label>
             <input
               value={permissions}
@@ -95,7 +97,7 @@ const CompCreateUser = () => {
               type="text"
               className="form-control"
             />
-          </div>
+          </div> */}
 
           <button type="subimit" className="btn btn-primary">
             Guardar

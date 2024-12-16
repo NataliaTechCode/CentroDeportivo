@@ -101,7 +101,7 @@ const CompCreateSchedule = () => {
       coach: coachName,
       sport: sportName,
     });
-    navigate("/");
+    navigate("/schedule");
   };
 
   const toggleOpen = () => setIsOpen(!isOpen);

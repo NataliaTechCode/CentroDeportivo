@@ -15,7 +15,7 @@ const CompCreateSport = () => {
     await axios.post(URI, {
       namesport: namesport,
     });
-    navigate("/");
+    navigate("/sports");
   };
 
   return (

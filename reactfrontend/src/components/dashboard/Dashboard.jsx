@@ -1,8 +1,9 @@
+// import { console } from "inspector";
 import React, { useEffect, useState } from "react";
 
 const MonthlyData = () => {
-  const [data, setData] = useState([]);
-  const [students, setStudents] = useState(0);
+  // const [data, setData] = useState([]);
+
   const [sport, setSport] = useState({});
   const [sportPopular, setSportPopular] = useState("");
   const [totalStudents, setTotalStudents] = useState(0);
@@ -16,15 +17,11 @@ const MonthlyData = () => {
       }
 
       const data = await response.json();
-      setData(data);
-
-      //Cantidad de estudiantes inscritos
-      setStudents(data.filter((student) => student.state === "Activa").length);
 
       //Deporte con mas estudiantes y total
       const totalSport = data.reduce((counter, student) => {
         const { sport } = student;
-        counter[sport] = (counter[sport] || 0) + 1; // Incrementa el contador del deporte o lo inicia en 1
+        counter[sport] = (counter[sport] || 0) + 1;
         return counter;
       }, {});
 
@@ -55,8 +52,6 @@ const MonthlyData = () => {
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
-
-    //Estado de mensualidad de cada deporte
   };
 
   useEffect(() => {
@@ -65,23 +60,15 @@ const MonthlyData = () => {
 
   return (
     <div>
-      <h1>Datos de Mensualidad</h1>
-      <ul>
-        {data.map((dato) => (
-          <li key={dato.id}>
-            <p>Estudiante: {dato.student}</p>
-            <p>CI: {dato.ci}</p>
-            <p>Deporte: {dato.sport}</p>
-            <p>Estado: {dato.state}</p>
-            <p>Horario: {dato.schedule}</p>
-            <p>Fecha de Inicio: {dato.startdate}</p>
-            <p>Fecha de Fin: {dato.enddate}</p>
-          </li>
-        ))}
-      </ul>
-      <h2>Cantidad de Estudiantes inscritos</h2>
-      <p>Total de estudiantes inscritos: {students}</p>
+      {/* Tarjetas*/}
 
+      <h2>Deporte con más estudiantes</h2>
+      <p>
+        {sportPopular} es el deporte con más estudiantes , con un total de{" "}
+        {totalStudents} estudiantes.
+      </p>
+
+      {/* Graficos */}
       <h2>Cantidad de Estudiantes por Deporte</h2>
       <ul>
         {Object.entries(sport).map(([sport, totalSport]) => (
@@ -90,12 +77,6 @@ const MonthlyData = () => {
           </li>
         ))}
       </ul>
-
-      <h2>Deporte con más estudiantes</h2>
-      <p>
-        {sportPopular} es el deporte con más estudiantes , con un total de{" "}
-        {totalStudents} estudiantes.
-      </p>
 
       <h2>Cantidad de Estudiantes por Estado y Deporte</h2>
       {Object.entries(stateMonthly).map(([sport, state]) => (

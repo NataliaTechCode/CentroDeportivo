@@ -50,7 +50,7 @@ const CompShowActivity = () => {
                     <td>{activity.idactivity}</td>
                     <td>{activity.nameactivity}</td>
                     <td>{activity.description}</td>
-                    <td>{activity.dateActivity}</td>
+                    <td>{activity.dateActivity.slice(0, 10)}</td>
                     {/* <td>{activity.photo}</td> */}
                     <td>
                       <Link

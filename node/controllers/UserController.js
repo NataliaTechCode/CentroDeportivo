@@ -26,16 +26,8 @@ const searchUser = async (req, res) => {
 
 const addUser = async (req, res) => {
   try {
-    const {
-      iduser,
-      name,
-      username,
-      password,
-      email,
-      role,
-      permissions,
-      
-    } = req.body;
+    const { iduser, name, username, password, email, role, permissions } =
+      req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const userId = await User.addUser({
       iduser,
@@ -44,7 +36,7 @@ const addUser = async (req, res) => {
       password: hashedPassword,
       email,
       role,
-      permissions
+      permissions,
     });
     res
       .status(200)

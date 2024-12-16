@@ -27,7 +27,7 @@ const CompEditUser = () => {
       role: role,
       // permissions: permissions,
     });
-    navigate("/");
+    navigate("/user");
   };
 
   const getUserByid = useCallback(async () => {
@@ -75,7 +75,7 @@ const CompEditUser = () => {
               <input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                type="text"
+                type="password" // Cambiado a 'password'
                 className="form-control"
               />
             </div>

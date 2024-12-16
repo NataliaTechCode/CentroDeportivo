@@ -1,10 +1,11 @@
 const express = require("express");
 const activityController = require("../controllers/ActivityController");
+const authenticateToken = require("../middlewares/authenticateToken");
 
 const router = express.Router();
 
 // Ruta para obtener todas las actividades
-router.get("/actividad", activityController.getActivity);
+router.get("/actividad", authenticateToken, activityController.getActivity);
 
 //Ruta para buscar actividad
 router.get("/actividad/:id", activityController.searchActivity);

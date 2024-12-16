@@ -1,17 +1,17 @@
-import React from 'react';
-import "../../../styles/Cards.css"
-import { FaUserGraduate, FaSwimmer } from 'react-icons/fa';
+import React from "react";
+import "../../../styles/Cards.css";
+import { FaPersonRunning } from "react-icons/fa6";
 
-const Cards = () => {
+const Cards = ({ title, value, color }) => {
   return (
     <div className="cards-container">
       <div className="card">
         <div className="card-icon">
-          <FaUserGraduate size={40} />
+          <FaPersonRunning color={color} size={40} />
         </div>
         <div className="card-content">
-          <h2>100</h2>
-          <p>Estudiantes</p>
+          <h2>{value}</h2>
+          <p>{title}</p>
         </div>
       </div>
     </div>

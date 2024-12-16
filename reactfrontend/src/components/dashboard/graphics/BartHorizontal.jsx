@@ -3,8 +3,8 @@ import { ResponsiveBar } from "@nivo/bar";
 const BartHorizontal = ({ data }) => (
   <ResponsiveBar
     data={data}
-    keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-    indexBy="country"
+    keys={["Disponible", "No Disponible"]}
+    indexBy="sport"
     margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
     padding={0.3}
     layout="horizontal"
@@ -18,7 +18,7 @@ const BartHorizontal = ({ data }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "country",
+      legend: "sport",
       legendPosition: "middle",
       legendOffset: 32,
     }}
@@ -26,7 +26,7 @@ const BartHorizontal = ({ data }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "food",
+      legend: "Deportes",
       legendPosition: "middle",
       legendOffset: -40,
     }}
@@ -64,7 +64,7 @@ const BartHorizontal = ({ data }) => (
     role="application"
     ariaLabel="Nivo bar chart demo"
     barAriaLabel={(e) =>
-      e.id + ": " + e.formattedValue + " in country: " + e.indexValue
+      e.id + ": " + e.formattedValue + " in sport: " + e.indexValue
     }
   />
 );

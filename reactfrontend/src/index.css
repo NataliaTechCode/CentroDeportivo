@@ -22,14 +22,13 @@ html,
 body,
 #root,
 .app,
-.content{
+.content {
   height: 100%;
   width: 100%;
-  background: #188fd1;
-  background: white;
+  /* background: #188fd1; */
 }
 
-.app{
+.app {
   display: flex;
   position: relative;
 }

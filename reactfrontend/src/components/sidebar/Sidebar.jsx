@@ -7,15 +7,14 @@ import { ThemeContext } from "../../App";
 
 import { MdOutlineSportsBaseball, MdCalendarMonth } from "react-icons/md";
 
-import { FaArrowLeft,FaPersonRunning } from "react-icons/fa6";
+import { FaArrowLeft, FaPersonRunning } from "react-icons/fa6";
 import { VscGraphLine } from "react-icons/vsc";
 import { AiFillThunderbolt } from "react-icons/ai";
-import { IoMdSettings } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
-import { FaUser, FaRegClock   } from "react-icons/fa";
+import { FaUser, FaRegClock } from "react-icons/fa";
 import { GiWhistle } from "react-icons/gi";
 
-export function Sidebar({ sidebarOpen, setSidebarOpen }) {
+export function Sidebar({ sidebarOpen, setSidebarOpen, setIsAuthenticated }) {
   const ModSidebaropen = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -31,7 +30,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
       </button>
       <div className="Logocontent">
         <div className="imgcontent">
-          <img src={logo} />
+          <img src={logo} alt="" />
         </div>
         <h2>Centro Deportivo Recreate</h2>
       </div>
@@ -87,22 +86,22 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
 const linksArray = [
   {
     label: "Deportes",
-    icon: <MdOutlineSportsBaseball/>,
+    icon: <MdOutlineSportsBaseball />,
     to: "/sports",
   },
   {
     label: "Horarios",
-    icon: <FaRegClock  />,
+    icon: <FaRegClock />,
     to: "/schedule",
   },
   {
     label: "Estudiantes",
-    icon: <FaPersonRunning/>,
+    icon: <FaPersonRunning />,
     to: "/student",
   },
   {
     label: "Entrenador",
-    icon: <GiWhistle/>,
+    icon: <GiWhistle />,
     to: "/coach",
   },
   {
@@ -120,16 +119,11 @@ const linksArray = [
     icon: <AiFillThunderbolt />,
     to: "/activity",
   },
-  {
-    label: "Avisos",
-    icon: <AiFillThunderbolt />,
-    to: "/prueba",
-  },
-  {
-    label: "Avisos",
-    icon: <AiFillThunderbolt />,
-    to: "/dass",
-  },
+  // {
+  //   label: "Avisos",
+  //   icon: <AiFillThunderbolt />,
+  //   to: "/datos",
+  // },
 ];
 const secondarylinksArray = [
   // {
@@ -142,11 +136,11 @@ const secondarylinksArray = [
     icon: <FaUser />,
     to: "/user",
   },
-  {
-    label: "Salir",
-    icon: <CiLogout />,
-    to: "/",
-  },
+  // {
+  //   label: "Salir",
+  //   icon: <CiLogout />,
+  //   to: "/login",
+  // },
 ];
 //#endregion
 

@@ -26,7 +26,7 @@ const CompCreateStudent = () => {
       phone: phone,
       photostudent: photostudent,
     });
-    navigate("/");
+    navigate("/student");
   };
 
   return (
@@ -96,7 +96,19 @@ const CompCreateStudent = () => {
             </div>
           </div>
 
-          <div class="form-field">
+          {/* <div class="form-field">
+            <div className="mb-3">
+              <label className="form-label">Foto del Estudiante: </label>
+              <input
+                value={photostudent}
+                onChange={(e) => setPhotostudent(e.target.value)}
+                type="file"
+                className="form-control"
+              />
+            </div>
+          </div> */}
+
+          {/* <div class="form-field">
             <div className="mb-3">
               <label className="form-label">Foto del Estudiante: </label>
               <input
@@ -106,8 +118,8 @@ const CompCreateStudent = () => {
                 className="form-control"
               />
             </div>
-          </div>
-    
+          </div> */}
+
           <button type="subimit" className="btn btn-primary">
             Guardar
           </button>

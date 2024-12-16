@@ -1,51 +1,16 @@
-import { ResponsiveBar} from "@nivo/bar";
+import { ResponsiveBar } from "@nivo/bar";
 
-
-const BartChart = ({data}) => {
+const BartChart = ({ data }) => {
   return (
     <ResponsiveBar
       data={data}
-      keys={["donut"]}
-      indexBy="student"
+      keys={["Vencida", "Por Vencer", "Activa"]}
+      indexBy="Deportes"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={{ scheme: "nivo" }}
-      defs={[
-        {
-          id: "dots",
-          type: "patternDots",
-          background: "inherit",
-          color: "#38bcb2",
-          size: 4,
-          padding: 1,
-          stagger: true,
-        },
-        {
-          id: "lines",
-          type: "patternLines",
-          background: "inherit",
-          color: "#eed312",
-          rotation: -45,
-          lineWidth: 6,
-          spacing: 10,
-        },
-      ]}
-      fill={[
-        {
-          match: {
-            id: "fries",
-          },
-          id: "dots",
-        },
-        {
-          match: {
-            id: "sandwich",
-          },
-          id: "lines",
-        },
-      ]}
+      colors={{ scheme: "category10" }}
       borderColor={{
         from: "color",
         modifiers: [["darker", 1.6]],
@@ -56,7 +21,7 @@ const BartChart = ({data}) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "Estudiantes",
+        legend: "Deportes",
         legendPosition: "middle",
         legendOffset: 32,
         truncateTickAt: 0,
@@ -65,7 +30,7 @@ const BartChart = ({data}) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "food",
+        legend: "Estado",
         legendPosition: "middle",
         legendOffset: -40,
         truncateTickAt: 0,
@@ -103,7 +68,7 @@ const BartChart = ({data}) => {
       role="application"
       ariaLabel="Nivo bar chart demo"
       barAriaLabel={(e) =>
-        e.id + ": " + e.formattedValue + " in student: " + e.indexValue
+        e.id + ": " + e.formattedValue + " in Deportes: " + e.indexValue
       }
     />
   );

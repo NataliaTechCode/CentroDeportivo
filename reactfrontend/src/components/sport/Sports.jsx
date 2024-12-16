@@ -33,7 +33,8 @@ const SportsList = () => {
     <Container>
       <div className="button-container">
         <Link to="/sport" className="button-schedule">
-        <IoMdInformationCircle />Deportes
+          <IoMdInformationCircle />
+          Deportes
         </Link>
       </div>
       <div className="sports-grid">
@@ -41,6 +42,14 @@ const SportsList = () => {
           <div
             key={sport.namesport}
             className="sport-card"
+            style={{
+              backgroundImage: `url(${
+                sport.imageUrl ||
+                "https://s.france24.com/media/display/6aca8d1a-7783-11ea-9cf2-005056bf87d6/w:1280/p:16x9/WEB%2005ABR%20DEPORTES%20PORTADA%20FOTO.jpg"
+              })`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
             onClick={() => handleNavigate(sport.namesport)}
           >
             <div className="overlay">

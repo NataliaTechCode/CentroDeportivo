@@ -71,7 +71,7 @@ const CompEditMonthly = () => {
       schedule: scheduleName,
       state: state,
     });
-    navigate("/");
+    navigate("/monthly");
   };
 
   const getMonthlyByid = useCallback(async () => {
@@ -309,7 +309,7 @@ const CompEditMonthly = () => {
             </div>
           </div>
 
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="form-label">Estado: </label>
             <input
               value={state}
@@ -317,7 +317,7 @@ const CompEditMonthly = () => {
               type="text"
               className="form-control"
             />
-          </div>
+          </div> */}
 
           <button type="subimit" className="btn btn-primary">
             Guardar

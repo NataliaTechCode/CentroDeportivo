@@ -8,7 +8,8 @@ import "./styles/Table.css";
 import "./styles/Forms.css";
 
 //importacion de Componentes
-import Login from "./components/login/Login";
+// import Login from "./components/login/Login";
+import LoginComponent from "./components/login/Login";
 
 import CompShowStudents from "./components/student/ShowStudent";
 import CompCreateStudent from "./components/student/CreateStudent";
@@ -40,8 +41,17 @@ import CompShowScheduleSport from "./components/schedule/ShowScheduleSport";
 import CompCreateSchedule from "./components/schedule/CreateSchedule";
 import CompEditSchedule from "./components/schedule/EditSchedule";
 
-//dashboard
+//proteccion
+import ProtectedRoute from "./components/login/ProtectedRoute";
 
+//dashboard
+import ShowDashboard from "./components/dashboard/ShowDashboard";
+// import MonthlyData from "./components/dashboard/Dashboard";
+
+//pruebas
+// import ShowDashboarda from "./components/dashboard/aass";
+// import Datos from "./hooks/datoss";
+import OtroArchivo from "./hooks/dat";
 export const ThemeContext = React.createContext(null);
 
 function App() {
@@ -49,7 +59,9 @@ function App() {
   const themeStyle = theme === "light" ? Light : Dark;
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return !!localStorage.getItem("token"); // Convierte la existencia del token en un booleano
+  });
 
   return (
     <div className="App">
@@ -63,7 +75,7 @@ function App() {
                   isAuthenticated ? (
                     <Navigate to="/student" />
                   ) : (
-                    <Login setIsAuthenticated={setIsAuthenticated} />
+                    <LoginComponent setIsAuthenticated={setIsAuthenticated} />
                   )
                 }
               />
@@ -74,6 +86,7 @@ function App() {
                 <Sidebar
                   sidebarOpen={sidebarOpen}
                   setSidebarOpen={setSidebarOpen}
+                  setIsAuthenticated={setIsAuthenticated}
                 />
               )}
 
@@ -81,56 +94,212 @@ function App() {
                 <Route
                   path="/student"
                   element={
-                    isAuthenticated ? (
+                    <ProtectedRoute>
                       <CompShowStudents />
-                    ) : (
-                      <Navigate to="/login" />
-                    )
+                    </ProtectedRoute>
+                  }
+                />
+                {/* dashboard */}
+                {/* <Route path="/prueba" element={<ShowDashboarda />} /> */}
+                {/* <Route path="/datos" element={<MonthlyData />} /> */}
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <ShowDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/datos"
+                  element={
+                    <ProtectedRoute>
+                      <OtroArchivo />
+                    </ProtectedRoute>
                   }
                 />
 
-                <Route path="/student/create" element={<CompCreateStudent />} />
-                <Route path="/student/edit/:id" element={<CompEditStudent />} />
+                <Route
+                  path="/student/create"
+                  element={
+                    <ProtectedRoute>
+                      <CompCreateStudent />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/student/edit/:id"
+                  element={
+                    <ProtectedRoute>
+                      <CompEditStudent />
+                    </ProtectedRoute>
+                  }
+                />
 
-                <Route path="/user" element={<CompShowUsers />} />
-                <Route path="/user/create" element={<CompCreateUser />} />
-                <Route path="/user/edit/:id" element={<CompEditUser />} />
+                <Route
+                  path="/user"
+                  element={
+                    <ProtectedRoute>
+                      <CompShowUsers />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/user/create"
+                  element={
+                    <ProtectedRoute>
+                      <CompCreateUser />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/user/edit/:id"
+                  element={
+                    <ProtectedRoute>
+                      <CompEditUser />
+                    </ProtectedRoute>
+                  }
+                />
 
-                <Route path="/coach" element={<CompShowCoach />} />
-                <Route path="/coach/create" element={<CompCreateCoach />} />
-                <Route path="/coach/edit/:id" element={<CompEditCoach />} />
+                <Route
+                  path="/coach"
+                  element={
+                    <ProtectedRoute>
+                      <CompShowCoach />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/coach/create"
+                  element={
+                    <ProtectedRoute>
+                      <CompCreateCoach />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/coach/edit/:id"
+                  element={
+                    <ProtectedRoute>
+                      <CompEditCoach />
+                    </ProtectedRoute>
+                  }
+                />
 
-                <Route path="/monthly" element={<CompShowMonthly />} />
-                <Route path="/monthly/create" element={<CompCreateMonthly />} />
-                <Route path="/monthly/edit/:id" element={<CompEditMonthly />} />
+                <Route
+                  path="/monthly"
+                  element={
+                    <ProtectedRoute>
+                      <CompShowMonthly />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/monthly/create"
+                  element={
+                    <ProtectedRoute>
+                      <CompCreateMonthly />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/monthly/edit/:id"
+                  element={
+                    <ProtectedRoute>
+                      <CompEditMonthly />
+                    </ProtectedRoute>
+                  }
+                />
 
-                <Route path="/activity" element={<CompShowActivity />} />
+                <Route
+                  path="/activity"
+                  element={
+                    <ProtectedRoute>
+                      <CompShowActivity />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route
                   path="/activity/create"
-                  element={<CompCreateActivity />}
+                  element={
+                    <ProtectedRoute>
+                      <CompCreateActivity />
+                    </ProtectedRoute>
+                  }
                 />
                 <Route
                   path="/activity/edit/:id"
-                  element={<CompEditActivity />}
+                  element={
+                    <ProtectedRoute>
+                      <CompEditActivity />
+                    </ProtectedRoute>
+                  }
                 />
 
-                <Route path="/sports" element={<SportsList />} />
-                <Route path="/sport" element={<CompShowSport />} />
-                <Route path="/sport/create" element={<CompCreateSport />} />
-                <Route path="/sport/edit/:id" element={<CompEditSport />} />
+                <Route
+                  path="/sports"
+                  element={
+                    <ProtectedRoute>
+                      <SportsList />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/sport"
+                  element={
+                    <ProtectedRoute>
+                      <CompShowSport />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/sport/create"
+                  element={
+                    <ProtectedRoute>
+                      <CompCreateSport />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/sport/edit/:id"
+                  element={
+                    <ProtectedRoute>
+                      <CompEditSport />
+                    </ProtectedRoute>
+                  }
+                />
 
-                <Route path="/schedule" element={<CompShowSchedule />} />
+                <Route
+                  path="/schedule"
+                  element={
+                    <ProtectedRoute>
+                      <CompShowSchedule />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route
                   path="/sport/:sportName"
-                  element={<CompShowScheduleSport />}
+                  element={
+                    <ProtectedRoute>
+                      <CompShowScheduleSport />
+                    </ProtectedRoute>
+                  }
                 />
                 <Route
                   path="/sport/schedule/create"
-                  element={<CompCreateSchedule />}
+                  element={
+                    <ProtectedRoute>
+                      <CompCreateSchedule />
+                    </ProtectedRoute>
+                  }
                 />
                 <Route
                   path="/schedule/edit/:id"
-                  element={<CompEditSchedule />}
+                  element={
+                    <ProtectedRoute>
+                      <CompEditSchedule />
+                    </ProtectedRoute>
+                  }
                 />
               </Routes>
             </Container>

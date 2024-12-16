@@ -1,42 +1,34 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { login } from "./authService";
 import "../../styles/Login.css";
 import user_icon from "../../assets/person.png";
 import password_icon from "../../assets/password.png";
 
-const Login = ({ setIsAuthenticated }) => {
-  const [username, setUsername] = useState("");
+const LoginComponent = ({ setIsAuthenticated }) => {
+  const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-
     try {
-      const response = await fetch("http://localhost:4000/api/usuario");
-      const users = await response.json();
-
-      const user = users.find(
-        (u) => u.username === username && u.password === password
-      );
-
-      if (user) {
-        setIsAuthenticated(true); // Llama a la función pasada por props
-        navigate("/sports");
-      } else {
-        setError("Usuario o contraseña incorrectos.");
-      }
-    } catch (error) {
-      console.error("Error al iniciar sesión:", error);
-      setError("Hubo un problema al conectarse con el servidor.");
+      console.log("SAda");
+      const response = await login(user, password);
+      localStorage.setItem("token", response.token); // Guardar token en el localStorage
+      console.log("sada");
+      const hasToken = !!localStorage.getItem("token");
+      alert("Inicio de sesión exitoso");
+      setIsAuthenticated(true);
+      console.log("Token recibido:", response.token);
+      console.log(hasToken);
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   return (
     <div className="containers">
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSubmit}>
         <div className="headers">
           <div className="texts">Iniciar Sesión</div>
           <div className="underline"></div>
@@ -49,14 +41,14 @@ const Login = ({ setIsAuthenticated }) => {
               type="texts"
               id="username"
               placeholder="Usuario"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
               required
             />
           </div>
 
           <div className="input">
-            <img src={password_icon} />
+            <img src={password_icon} alt="" />
             <input
               type="password"
               id="password"
@@ -72,6 +64,7 @@ const Login = ({ setIsAuthenticated }) => {
             </p>
           )}
         </div>
+
         <div className="submit-container">
           <button className="submit" type="submit">
             Ingresar
@@ -82,4 +75,4 @@ const Login = ({ setIsAuthenticated }) => {
   );
 };
 
-export default Login;
+export default LoginComponent;

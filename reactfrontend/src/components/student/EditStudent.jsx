@@ -28,7 +28,7 @@ const CompEditStudent = () => {
       phone: phone,
       photostudent: photostudent,
     });
-    navigate("/");
+    navigate("/student");
   };
 
   const getStudentByid = useCallback(async () => {
@@ -112,7 +112,7 @@ const CompEditStudent = () => {
             </div>
           </div>
 
-          <div class="form-field">
+          {/* <div class="form-field">
             <div className="mb-3">
               <label className="form-label">Foto del Estudiante: </label>
               <input
@@ -122,7 +122,7 @@ const CompEditStudent = () => {
                 className="form-control"
               />
             </div>
-          </div>
+          </div> */}
 
           <button type="subimit" className="btn btn-primary">
             Guardar
