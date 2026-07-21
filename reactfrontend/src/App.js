@@ -63,12 +63,14 @@ function App() {
     return !!localStorage.getItem("token"); // Convierte la existencia del token en un booleano
   });
 
+
   return (
     <div className="App">
       <ThemeContext.Provider value={{ setTheme, theme }}>
         <ThemeProvider theme={themeStyle}>
           <BrowserRouter>
             <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
               <Route
                 path="/login"
                 element={
@@ -104,7 +106,7 @@ function App() {
                 {/* <Route path="/datos" element={<MonthlyData />} /> */}
                 <Route
                   path="/dashboard"
-                  element={
+                  element={ 
                     <ProtectedRoute>
                       <ShowDashboard />
                     </ProtectedRoute>

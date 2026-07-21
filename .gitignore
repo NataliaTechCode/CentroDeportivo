@@ -1,1 +1,6 @@
 Key.json
+node/.env
+node/Key.json
+node/node_modules/
+reactfrontend/node_modules/
+reactfrontend/build/
