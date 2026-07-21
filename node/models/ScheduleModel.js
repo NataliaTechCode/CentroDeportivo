@@ -1,7 +1,16 @@
 const { db } = require("../database/firebase");
 
 class Schedule {
-  constructor(idschedule, starttime, endtime, dayWeek, limitStudents, totalstudents, coach, sport) {
+  constructor(
+    idschedule,
+    starttime,
+    endtime,
+    dayWeek,
+    limitStudents,
+    totalstudents,
+    coach,
+    sport
+  ) {
     this.idschedule = idschedule;
     this.starttime = starttime;
     this.endtime = endtime;
@@ -14,6 +23,9 @@ class Schedule {
 
   static async getSchedule() {
     try {
+      // Llamar a updateTotalStudents antes de obtener los horarios
+      // await this.updateTotalStudents();
+
       const snapshot = await db.collection("schedule").get();
       return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     } catch (error) {
@@ -93,6 +105,64 @@ class Schedule {
       return { message: "horario eliminado con éxito" };
     } catch (error) {
       throw new Error("Error eliminando horario: " + error.message);
+    }
+  }
+
+  static async updateTotalStudents() {
+    try {
+      // Obtener la colección de schedule
+      const scheduleSnapshot = await db.collection("schedule").get();
+      const scheduleDocs = scheduleSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      // Obtener la colección de monthly
+      const monthlySnapshot = await db.collection("monthly").get();
+      const monthlyDocs = monthlySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      // Obtener la fecha actual
+      const currentDate = new Date();
+
+      // Iterar sobre cada documento en la colección schedule
+      for (const schedule of scheduleDocs) {
+        const { sport, starttime, endtime } = schedule;
+
+        // Filtrar estudiantes en la tabla monthly
+        const filteredStudents = monthlyDocs.filter((monthly) => {
+          const monthlyEndDate = new Date(monthly.enddate);
+          const scheduleTime = monthly.schedule; // Horario almacenado
+
+          // Condiciones de filtrado:
+          // 1. Coincidencia de deporte (sport)
+          // 2. Horario coincida exactamente con el starttime y endtime
+          // 3. El enddate sea al menos un día antes de la fecha actual
+          return (
+            monthly.sport === sport &&
+            scheduleTime.includes(starttime) &&
+            scheduleTime.includes(endtime) &&
+            monthlyEndDate < currentDate
+          );
+        });
+
+        // Contar cuántos estudiantes cumplen las condiciones
+        const totalStudents = filteredStudents.length;
+
+        // Actualizar el atributo totalstudents en la tabla schedule
+        await db.collection("schedule").doc(schedule.id).update({
+          totalstudents: totalStudents,
+        });
+      }
+
+      console.log(
+        "Total de estudiantes actualizado correctamente en schedule."
+      );
+    } catch (error) {
+      console.error("Error actualizando totalstudents:", error.message);
+      throw new Error("Error actualizando totalstudents: " + error.message);
     }
   }
 }
