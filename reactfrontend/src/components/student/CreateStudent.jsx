@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { DatePicker } from "@material-ui/pickers";
 
-const URI = "http://localhost:4000/api/estudiante";
+const URI = "https://centrodeportivo.onrender.com/api/estudiante";
 
 const CompCreateStudent = () => {
   const [name, setName] = useState("");

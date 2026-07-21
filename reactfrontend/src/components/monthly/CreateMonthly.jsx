@@ -6,10 +6,10 @@ import { DatePicker } from "@material-ui/pickers";
 import "../../styles/Detachable.css";
 import { IoIosArrowForward } from "react-icons/io";
 
-const URI = "http://localhost:4000/api/mensualidad";
-const URIS = "http://localhost:4000/api/estudiante";
-const URID = "http://localhost:4000/api/deporte";
-const URIH = "http://localhost:4000/api/horario";
+const URI = "https://centrodeportivo.onrender.com/api/mensualidad";
+const URIS = "https://centrodeportivo.onrender.com/api/estudiante";
+const URID = "https://centrodeportivo.onrender.com/api/deporte";
+const URIH = "https://centrodeportivo.onrender.com/api/horario";
 
 const CompCreateMonthly = () => {
   const [student, setStudent] = useState([]);

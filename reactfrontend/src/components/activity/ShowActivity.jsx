@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 
-const URI = "http://localhost:4000/api/actividad/";
+const URI = "https://centrodeportivo.onrender.com/api/actividad/";
 
 const CompShowActivity = () => {
   const [activity, setActivity] = useState([]);

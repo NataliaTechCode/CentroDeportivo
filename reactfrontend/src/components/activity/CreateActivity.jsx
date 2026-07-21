@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { DatePicker } from "@material-ui/pickers";
 
-const URI = "http://localhost:4000/api/actividad";
+const URI = "https://centrodeportivo.onrender.com/api/actividad";
 
 const CompCreateActivity = () => {
   const [nameactivity, setNameactivity] = useState("");

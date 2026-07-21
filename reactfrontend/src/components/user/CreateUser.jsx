@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const URI = "http://localhost:4000/api/usuario";
+const URI = "https://centrodeportivo.onrender.com/api/usuario";
 
 const CompCreateUser = () => {
   const [name, setName] = useState("");

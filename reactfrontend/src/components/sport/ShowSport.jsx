@@ -6,7 +6,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 import { FaEye } from "react-icons/fa";
 
-const URI = "http://localhost:4000/api/deporte/";
+const URI = "https://centrodeportivo.onrender.com/api/deporte/";
 
 const CompShowSport = () => {
   const [sports, setSport] = useState([]);

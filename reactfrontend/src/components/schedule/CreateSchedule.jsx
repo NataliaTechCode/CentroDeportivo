@@ -7,9 +7,9 @@ import "../../styles/Detachable.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { TimePicker } from "@material-ui/pickers";
 
-const URI = "http://localhost:4000/api/horario";
-const URIE = "http://localhost:4000/api/entrenador";
-const URID = "http://localhost:4000/api/deporte";
+const URI = "https://centrodeportivo.onrender.com/api/horario";
+const URIE = "https://centrodeportivo.onrender.com/api/entrenador";
+const URID = "https://centrodeportivo.onrender.com/api/deporte";
 
 const CompCreateSchedule = () => {
   const [starttime, setStarttime] = useState();

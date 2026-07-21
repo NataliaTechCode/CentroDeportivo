@@ -116,11 +116,11 @@ const linksArray = [
     icon: <MdCalendarMonth />,
     to: "/monthly",
   },
-  {
-    label: "Dashboard",
-    icon: <VscGraphLine />,
-    to: "/dashboard",
-  },
+  // {
+  //   label: "Dashboard",
+  //   icon: <VscGraphLine />,
+  //   to: "/dashboard",
+  // },
   {
     label: "Avisos",
     icon: <AiFillThunderbolt />,

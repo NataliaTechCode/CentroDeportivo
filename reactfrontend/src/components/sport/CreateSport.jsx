@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const URI = "http://localhost:4000/api/deporte";
+const URI = "https://centrodeportivo.onrender.com/api/deporte";
 
 const CompCreateSport = () => {
   const [namesport, setNameSport] = useState("");

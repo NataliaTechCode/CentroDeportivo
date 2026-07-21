@@ -18,7 +18,7 @@ const useFetchData = () => {
 
   const getMonthlyData2 = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/mensualidad");
+      const response = await fetch("https://centrodeportivo.onrender.com/api/mensualidad");
       if (!response.ok) {
         throw new Error(`Error en la solicitud: ${response.status}`);
       }
@@ -31,7 +31,7 @@ const useFetchData = () => {
 
   const getStudentData2 = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/estudiante");
+      const response = await fetch("https://centrodeportivo.onrender.com/api/estudiante");
       if (!response.ok) {
         throw new Error(`Error en la solicitud: ${response.status}`);
       }
@@ -44,7 +44,7 @@ const useFetchData = () => {
 
   const getSportsData2 = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/deporte");
+      const response = await fetch("https://centrodeportivo.onrender.com/api/deporte");
       if (!response.ok) {
         throw new Error(`Error en la solicitud: ${response.status}`);
       }
@@ -57,7 +57,7 @@ const useFetchData = () => {
 
   const getCoachData2 = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/entrenador");
+      const response = await fetch("https://centrodeportivo.onrender.com/api/entrenador");
       if (!response.ok) {
         throw new Error(`Error en la solicitud: ${response.status}`);
       }
@@ -96,7 +96,7 @@ const useFetchData = () => {
 
   const getStudentData = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/estudiante");
+      const response = await fetch("https://centrodeportivo.onrender.com/api/estudiante");
       if (!response.ok) {
         throw new Error(`Error en la solicitud: ${response.status}`);
       }
@@ -113,7 +113,7 @@ const useFetchData = () => {
 
   const getCoachData = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/entrenador/");
+      const response = await fetch("https://centrodeportivo.onrender.com/api/entrenador/");
       if (!response.ok) {
         throw new Error(`Error en la solicitud: ${response.status}`);
       }
@@ -126,7 +126,7 @@ const useFetchData = () => {
 
   const getActiveStudentsBySport = async () => {
     try {
-      const sportsResponse = await fetch("http://localhost:4000/api/deporte");
+      const sportsResponse = await fetch("https://centrodeportivo.onrender.com/api/deporte");
       if (!sportsResponse.ok) {
         throw new Error(
           `Error en la solicitud de deportes: ${sportsResponse.status}`
@@ -135,7 +135,7 @@ const useFetchData = () => {
       const sportsData = await sportsResponse.json();
 
       const monthlyResponse = await fetch(
-        "http://localhost:4000/api/mensualidad/"
+        "https://centrodeportivo.onrender.com/api/mensualidad/"
       );
       if (!monthlyResponse.ok) {
         throw new Error(
@@ -171,9 +171,9 @@ const useFetchData = () => {
 
   const getScheduleAvailability = async () => {
     try {
-      const sportsResponse = await fetch("http://localhost:4000/api/deporte");
+      const sportsResponse = await fetch("https://centrodeportivo.onrender.com/api/deporte");
       const schedulesResponse = await fetch(
-        "http://localhost:4000/api/horario"
+        "https://centrodeportivo.onrender.com/api/horario"
       );
 
       if (!sportsResponse.ok || !schedulesResponse.ok) {
@@ -218,7 +218,7 @@ const useFetchData = () => {
   const fetchAndProcessData = async () => {
     try {
       const mensualidadesResponse = await fetch(
-        "http://localhost:4000/api/mensualidad"
+        "https://centrodeportivo.onrender.com/api/mensualidad"
       );
       if (!mensualidadesResponse.ok) {
         throw new Error(
@@ -227,7 +227,7 @@ const useFetchData = () => {
       }
       const mensualidades = await mensualidadesResponse.json();
 
-      const deportesResponse = await fetch("http://localhost:4000/api/deporte");
+      const deportesResponse = await fetch("https://centrodeportivo.onrender.com/api/deporte");
       if (!deportesResponse.ok) {
         throw new Error(
           `Error al obtener deportes: ${deportesResponse.status}`
@@ -281,7 +281,7 @@ const useFetchData = () => {
   // Función para obtener los deportes
   const getSportsData = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/deporte");
+      const response = await fetch("https://centrodeportivo.onrender.com/api/deporte");
       if (!response.ok) {
         throw new Error(
           `Error en la solicitud de deportes: ${response.status}`
@@ -297,7 +297,7 @@ const useFetchData = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getMonthlyDataBySport = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/mensualidad");
+      const response = await fetch("https://centrodeportivo.onrender.com/api/mensualidad");
       if (!response.ok) {
         throw new Error(
           `Error en la solicitud de mensualidades: ${response.status}`

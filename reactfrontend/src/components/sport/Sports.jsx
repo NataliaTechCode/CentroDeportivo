@@ -14,7 +14,7 @@ const SportsList = () => {
   useEffect(() => {
     const fetchSports = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/deporte");
+        const response = await fetch("https://centrodeportivo.onrender.com/api/deporte");
         const data = await response.json();
         setSports(data); // Guarda los deportes en el estado
       } catch (error) {

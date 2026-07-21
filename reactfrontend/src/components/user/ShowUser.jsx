@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 
-const URI = "http://localhost:4000/api/usuario/";
+const URI = "https://centrodeportivo.onrender.com/api/usuario/";
 
 const CompShowUsers = () => {
   const [users, setUser] = useState([]);

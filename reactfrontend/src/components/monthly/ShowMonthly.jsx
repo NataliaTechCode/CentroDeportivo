@@ -6,8 +6,8 @@ import "../../styles/State.css";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 
-const URI = "http://localhost:4000/api/mensualidad/";
-const URIE = "http://localhost:4000/api/estudiante/";
+const URI = "https://centrodeportivo.onrender.com/api/mensualidad/";
+const URIE = "https://centrodeportivo.onrender.com/api/estudiante/";
 
 const CompShowMonthly = () => {
   const [monthlies, setMonthly] = useState([]);

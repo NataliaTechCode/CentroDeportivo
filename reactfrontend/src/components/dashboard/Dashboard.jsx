@@ -11,7 +11,7 @@ const MonthlyData = () => {
 
   const getMonthlyData = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/mensualidad/");
+      const response = await fetch("https://centrodeportivo.onrender.com/api/mensualidad/");
       if (!response.ok) {
         throw new Error(`Error en la solicitud: ${response.status}`);
       }

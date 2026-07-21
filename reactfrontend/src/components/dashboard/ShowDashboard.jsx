@@ -27,11 +27,11 @@ const ShowDashboard = () => {
     <div>
       <div className="cards-container">
         <Cards
-          title="Estudiantes Actuales"
+          title="Total de Estudiantes"
           value={allstudents}
           color="#124b98"
         />
-        <Cards title="Total Estudiantes" value={students} color="#f9a11b" />
+        <Cards title="Estudiantes actuales" value={students} color="#f9a11b" />
         <Cards title="Total Entrenadores" value={allcoach} color="#f9dc1c" />
       </div>
       <div className="chartlong marimekko">

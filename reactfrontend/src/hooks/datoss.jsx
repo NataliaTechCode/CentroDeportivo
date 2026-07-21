@@ -34,11 +34,11 @@ const useDatos = () => {
           coachResponse,
           scheduleResponse,
         ] = await Promise.all([
-          fetch("http://localhost:4000/api/mensualidad/"),
-          fetch("http://localhost:4000/api/estudiante/"),
-          fetch("http://localhost:4000/api/deporte/"),
-          fetch("http://localhost:4000/api/entrenador/"),
-          fetch("http://localhost:4000/api/horario/"),
+          fetch("https://centrodeportivo.onrender.com/api/mensualidad/"),
+          fetch("https://centrodeportivo.onrender.com/api/estudiante/"),
+          fetch("https://centrodeportivo.onrender.com/api/deporte/"),
+          fetch("https://centrodeportivo.onrender.com/api/entrenador/"),
+          fetch("https://centrodeportivo.onrender.com/api/horario/"),
         ]);
 
         if (

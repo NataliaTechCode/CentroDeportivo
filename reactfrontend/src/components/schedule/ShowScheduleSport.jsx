@@ -5,7 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 
-const URI = "http://localhost:4000/api/horario/";
+const URI = "https://centrodeportivo.onrender.com/api/horario/";
 
 const CompShowScheduleSport = () => {
   const { sportName } = useParams();
@@ -13,7 +13,7 @@ const CompShowScheduleSport = () => {
 
   const fetchSchedules = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/horario");
+      const response = await fetch("https://centrodeportivo.onrender.com/api/horario");
       const data = await response.json();
 
       // Filtrar los horarios para que solo coincidan con el deporte en la URL
